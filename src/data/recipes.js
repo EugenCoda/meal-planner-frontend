@@ -10,6 +10,7 @@ export default [
       "https://www.edamam.com/web-img/a6f/a6ff0db27d23fe7c4cf2db008098d6fe",
     description:
       "Here you have it, the peaches and cream overnight oats recipe I promised a few days back. Another sensational flavor of overnight oats that is gluten-free, vegan and perfect since peaches are in season.",
+    isFavorite: false,
   },
   {
     id: 2,
@@ -21,6 +22,7 @@ export default [
     imgURL:
       "https://www.edamam.com/web-img/34f/34fda53155f4ac9227271d14b6d4def0.jpg",
     description: "ROASTED TOMATO, EGGPLANT AND HALOUMI BURGER",
+    isFavorite: false,
   },
   {
     id: 3,
@@ -32,6 +34,7 @@ export default [
       "https://www.edamam.com/web-img/464/4647ad54b1e7de7bf16828d734379ee7.jpg",
     description:
       "This refreshing salad takes on various guises in Greece depending on what vegetables are in season, but it almost always features feta and a dusting of dried oregano.",
+    isFavorite: false,
   },
   {
     id: 4,
@@ -44,5 +47,6 @@ export default [
       "https://www.edamam.com/web-img/f57/f5746e16027a3743bc86e06fc6096a6d.jpg",
     description:
       "Sweet tomatoes, salty olives and tangy cheese are a perfect afternoon pick-me-up.",
+    isFavorite: false,
   },
 ];

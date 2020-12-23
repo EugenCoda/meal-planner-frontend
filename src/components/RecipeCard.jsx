@@ -26,11 +26,20 @@ const useStyles = makeStyles({
 
 const RecipeCard = (props) => {
   const classes = useStyles();
-  const { mealType, recipeName, recipePublisher, recipeURL, imgURL } = props;
-  console.log(mealType);
+  const {
+    id,
+    mealType,
+    recipeName,
+    recipePublisher,
+    recipeURL,
+    imgURL,
+    history,
+  } = props;
+  console.log(id, mealType);
+
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea onClick={() => history.push(`/recipe/${id}`)}>
         <CardMedia
           className={classes.media}
           component="img"

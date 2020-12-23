@@ -6,11 +6,13 @@ import Search from "./pages/Search";
 import Favorites from "./pages/Favorites";
 import ShoppingList from "./pages/ShoppingList";
 import Settings from "./pages/Settings";
+import Recipe from "./pages/Recipe";
 import { Route, Switch } from "react-router-dom";
+import { GlobalProvider } from "./context/GlobalState";
 
 function App() {
   return (
-    <>
+    <GlobalProvider>
       <Grid container direction="column">
         <Grid item style={{ paddingBottom: 40 }}>
           <Header />
@@ -40,12 +42,17 @@ function App() {
                 path="/settings"
                 render={(props) => <Settings {...props} />}
               />
+              <Route
+                exact
+                path="/recipe/:recipeID"
+                render={(props) => <Recipe {...props} />}
+              />
             </Switch>
           </Grid>
           <Grid item xs={false} sm={1} />
         </Grid>
       </Grid>
-    </>
+    </GlobalProvider>
   );
 }
 

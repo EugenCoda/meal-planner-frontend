@@ -1,17 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
 import { Box, Grid, Typography } from "@material-ui/core";
 import SearchBox from "../components/Search/SearchBox";
-import RecipeCard from "../components/RecipeCard";
-import recipeList from "../data/recipes";
+import { getRecipeCard } from "../utils/getRecipeCard";
 
-const Search = () => {
-  const getRecipeCard = (recipe) => {
-    return (
-      <Grid key={recipe.id} item xs={6} sm={4} md={3}>
-        <RecipeCard {...recipe} />
-      </Grid>
-    );
-  };
+const Search = (props) => {
+  const { recipes } = useContext(GlobalContext);
+  const { history } = props;
   return (
     <Box>
       <Grid container>
@@ -29,7 +24,7 @@ const Search = () => {
               Showing recipes for peanut butter cookies (1-10 out of 26 results)
             </Typography>
             <Grid container spacing={1}>
-              {recipeList.map((recipe) => getRecipeCard(recipe))}
+              {recipes.map((recipe) => getRecipeCard(recipe, history))}
             </Grid>
           </Grid>
           <Grid item xs={false} sm={1} />

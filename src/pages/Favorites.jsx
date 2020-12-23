@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
 import { Grid, Paper, Tabs, Tab } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import RecipeCard from "../components/RecipeCard";
-import recipeList from "../data/recipes";
+import { getRecipeCard } from "../utils/getRecipeCard";
 
 const useStyles = makeStyles({
   root: {
@@ -13,19 +13,14 @@ const useStyles = makeStyles({
   },
 });
 
-const Favorites = () => {
+const Favorites = (props) => {
+  const { recipes } = useContext(GlobalContext);
+  const { history } = props;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-  const getRecipeCard = (recipe) => {
-    return (
-      <Grid key={recipe.id} item xs={6} sm={4} md={3}>
-        <RecipeCard {...recipe} />
-      </Grid>
-    );
   };
 
   return (
@@ -48,7 +43,7 @@ const Favorites = () => {
       </Paper>
 
       <Grid container spacing={1} className={classes.recipesContainer}>
-        {recipeList.map((recipe) => getRecipeCard(recipe))}
+        {recipes.map((recipe) => getRecipeCard(recipe, history))}
       </Grid>
     </>
   );
