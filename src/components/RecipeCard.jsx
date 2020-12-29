@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -11,6 +12,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const useStyles = makeStyles({
   root: {
@@ -25,17 +27,17 @@ const useStyles = makeStyles({
 });
 
 const RecipeCard = (props) => {
+  const { addToFavorites } = useContext(GlobalContext);
   const classes = useStyles();
   const {
     id,
-    mealType,
     recipeName,
     recipePublisher,
     recipeURL,
     imgURL,
+    isFavorite,
     history,
   } = props;
-  console.log(id, mealType);
 
   return (
     <Card className={classes.root}>
@@ -61,8 +63,11 @@ const RecipeCard = (props) => {
         <IconButton
           aria-label="add to favorites"
           className={classes.favoriteButton}
+          onClick={() => {
+            addToFavorites(id);
+          }}
         >
-          <FavoriteBorderIcon />
+          {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
         </IconButton>
       </CardActions>
     </Card>

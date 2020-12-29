@@ -15,6 +15,8 @@ const useStyles = makeStyles({
 
 const Favorites = (props) => {
   const { recipes } = useContext(GlobalContext);
+  // Select only the favorite recipes
+  const favoriteRecipes = recipes.filter((recipe) => recipe.isFavorite);
   const { history } = props;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -43,7 +45,7 @@ const Favorites = (props) => {
       </Paper>
 
       <Grid container spacing={1} className={classes.recipesContainer}>
-        {recipes.map((recipe) => getRecipeCard(recipe, history))}
+        {favoriteRecipes.map((recipe) => getRecipeCard(recipe, history))}
       </Grid>
     </>
   );
