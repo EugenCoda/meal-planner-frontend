@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GlobalContext } from "../../context/GlobalState";
 import { Paper, Typography, Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import dietList from "../../data/diets";
+import CheckIcon from "@material-ui/icons/Check";
 
 const useStyles = makeStyles({
   root: {
@@ -21,15 +22,36 @@ const useStyles = makeStyles({
 
 const Diets = () => {
   const classes = useStyles();
+  const { diets, selectDiet } = useContext(GlobalContext);
   return (
     <Paper className={classes.mainContainer}>
       <Typography variant="h5" className={classes.title}>
         Diets:
       </Typography>
       <Grid container spacing={2} className={classes.dietsContainer}>
-        {dietList.map((diet) => (
+        {diets.map((diet) => (
           <Grid item key={diet.id}>
-            <Button variant="contained">{diet.name}</Button>
+            {diet.isSelected ? (
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<CheckIcon />}
+                onClick={() => {
+                  selectDiet(diet.id);
+                }}
+              >
+                {diet.name}
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                onClick={() => {
+                  selectDiet(diet.id);
+                }}
+              >
+                {diet.name}
+              </Button>
+            )}
           </Grid>
         ))}
       </Grid>

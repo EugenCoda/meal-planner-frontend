@@ -16,7 +16,7 @@ export default [
     id: 2,
     mealType: "lunch",
     recipeName: "ROASTED TOMATO, EGGPLANT AND HALOUMI BURGER",
-    recipePublisher: "donnahay.com.au/",
+    recipePublisher: "donnahay.com.au",
     recipeURL:
       "https://www.donnahay.com.au/recipes/mains/vegetables/roasted-tomato-eggplant-and-haloumi-burger",
     imgURL:

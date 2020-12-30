@@ -10,6 +10,7 @@ import {
   Typography,
   CardMedia,
   IconButton,
+  Tooltip,
 } from "@material-ui/core";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -60,15 +61,20 @@ const RecipeCard = (props) => {
         <Link href={recipeURL} target="_blank" color="inherit">
           {recipePublisher}
         </Link>
-        <IconButton
-          aria-label="add to favorites"
-          className={classes.favoriteButton}
-          onClick={() => {
-            addToFavorites(id);
-          }}
+        <Tooltip
+          title={isFavorite ? "Remove From Favorites" : "Add To Favorite"}
+          aria-label="favorites"
         >
-          {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-        </IconButton>
+          <IconButton
+            aria-label="add to favorites"
+            className={classes.favoriteButton}
+            onClick={() => {
+              addToFavorites(id);
+            }}
+          >
+            {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          </IconButton>
+        </Tooltip>
       </CardActions>
     </Card>
   );

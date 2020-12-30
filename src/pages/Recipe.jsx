@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
-import { Button } from "@material-ui/core";
+import { Button, Link } from "@material-ui/core";
 
 const Recipe = (props) => {
   const { recipes } = useContext(GlobalContext);
@@ -8,7 +8,14 @@ const Recipe = (props) => {
   const { params } = match;
   const { recipeID } = params;
 
-  const { id, recipeName, mealType, imgURL } = recipes[recipeID - 1];
+  const {
+    id,
+    recipeName,
+    recipePublisher,
+    recipeURL,
+    mealType,
+    imgURL,
+  } = recipes[recipeID - 1];
 
   return (
     <>
@@ -20,6 +27,9 @@ const Recipe = (props) => {
       <Button variant="contained" onClick={() => history.push("/")}>
         Home
       </Button>
+      <Link href={recipeURL} target="_blank" color="inherit">
+        {recipePublisher}
+      </Link>
     </>
   );
 };

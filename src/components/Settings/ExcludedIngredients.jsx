@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GlobalContext } from "../../context/GlobalState";
 import { Paper, Typography, Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import ingredientList from "../../data/ingredients";
+import CheckIcon from "@material-ui/icons/Check";
 
 const useStyles = makeStyles({
   root: {
@@ -21,15 +22,36 @@ const useStyles = makeStyles({
 
 const ExcludedIngredients = () => {
   const classes = useStyles();
+  const { ingredients, selectIngredient } = useContext(GlobalContext);
   return (
     <Paper className={classes.mainContainer}>
       <Typography variant="h5" className={classes.title}>
         Excluded Ingredients:
       </Typography>
       <Grid container spacing={2} className={classes.ingredientsContainer}>
-        {ingredientList.map((ingredient) => (
+        {ingredients.map((ingredient) => (
           <Grid item key={ingredient.id}>
-            <Button variant="contained">{ingredient.name}</Button>
+            {ingredient.isSelected ? (
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<CheckIcon />}
+                onClick={() => {
+                  selectIngredient(ingredient.id);
+                }}
+              >
+                {ingredient.name}
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                onClick={() => {
+                  selectIngredient(ingredient.id);
+                }}
+              >
+                {ingredient.name}
+              </Button>
+            )}
           </Grid>
         ))}
       </Grid>
