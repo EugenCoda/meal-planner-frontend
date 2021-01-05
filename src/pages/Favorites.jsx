@@ -1,15 +1,7 @@
 import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { GlobalContext } from "../context/GlobalState";
-import {
-  Grid,
-  Paper,
-  Tabs,
-  Tab,
-  Box,
-  Typography,
-  useMediaQuery,
-} from "@material-ui/core";
+import { Grid, Paper, Tabs, Tab, Box, useMediaQuery } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { getRecipeCard } from "../utils/getRecipeCard";
 
@@ -24,11 +16,7 @@ function TabPanel(props) {
       aria-labelledby={`favorite-recipe-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box p={3}>{children}</Box>}
     </div>
   );
 }

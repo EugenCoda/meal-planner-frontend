@@ -62,6 +62,26 @@ export const AppReducer = (state, action) => {
           return { ...allergy };
         }),
       };
+    case "ADD_SHOPPING_ITEM":
+      return {
+        ...state,
+        loading: false,
+        shoppingList: [...state.shoppingList, action.payload],
+      };
+    case "MARK_SHOPPING_ITEM_COMPLETED":
+      return {
+        ...state,
+        loading: false,
+        shoppingList: state.shoppingList.map((item) => {
+          if (item.id === action.payload) {
+            return {
+              ...item,
+              isCompleted: !item.isCompleted,
+            };
+          }
+          return { ...item };
+        }),
+      };
     case "ERROR":
       return {
         ...state,

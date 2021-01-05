@@ -1,16 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalState";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Tabs,
-  Tab,
-  Typography,
-  Box,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-} from "@material-ui/core";
+import { Tabs, Tab, Box } from "@material-ui/core";
+import ShoppingListTab from "./ShoppingListTab";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -23,11 +16,7 @@ function TabPanel(props) {
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box p={3}>{children}</Box>}
     </div>
   );
 }
@@ -59,6 +48,78 @@ const useStyles = makeStyles((theme) => ({
 
 const ShoppingListBox = () => {
   const { shoppingList } = useContext(GlobalContext);
+  // Select all uncompleted shopping items
+  const shoppingItemsUncompleteFull = shoppingList.filter(
+    (item) => !item.isCompleted
+  );
+  // Select all completed shopping items
+  const shoppingItemsCompletedFull = shoppingList.filter(
+    (item) => item.isCompleted
+  );
+  // Select uncompleted shopping items - Fruits & Vegetables
+  const shoppingItemsUncompleteFruitsVegetables = shoppingItemsUncompleteFull.filter(
+    (item) => item.category === "Fruits & Vegetables"
+  );
+  // Select completed shopping items - Fruits & Vegetables
+  const shoppingItemsCompletedFruitsVegetables = shoppingItemsCompletedFull.filter(
+    (item) => item.category === "Fruits & Vegetables"
+  );
+  // Select uncompleted shopping items - Bakery
+  const shoppingItemsUncompleteBakery = shoppingItemsUncompleteFull.filter(
+    (item) => item.category === "Bakery"
+  );
+  // Select completed shopping items - Bakery
+  const shoppingItemsCompletedBakery = shoppingItemsCompletedFull.filter(
+    (item) => item.category === "Bakery"
+  );
+  // Select uncompleted shopping items - Meat & Seafood
+  const shoppingItemsUncompleteMeatSeafood = shoppingItemsUncompleteFull.filter(
+    (item) => item.category === "Meat & Seafood"
+  );
+  // Select completed shopping items - Meat & Seafood
+  const shoppingItemsCompletedMeatSeafood = shoppingItemsCompletedFull.filter(
+    (item) => item.category === "Meat & Seafood"
+  );
+  // Select uncompleted shopping items - Dairy, Cheese & Eggs
+  const shoppingItemsUncompleteDairyCheeseEggs = shoppingItemsUncompleteFull.filter(
+    (item) => item.category === "Dairy, Cheese & Eggs"
+  );
+  // Select completed shopping items - Dairy, Cheese & Eggs
+  const shoppingItemsCompletedDairyCheeseEggs = shoppingItemsCompletedFull.filter(
+    (item) => item.category === "Dairy, Cheese & Eggs"
+  );
+  // Select uncompleted shopping items - Rice, Grains & Beans
+  const shoppingItemsUncompleteRiceGrainsBeans = shoppingItemsUncompleteFull.filter(
+    (item) => item.category === "Rice, Grains & Beans"
+  );
+  // Select completed shopping items - Rice, Grains & Beans
+  const shoppingItemsCompletedRiceGrainsBeans = shoppingItemsCompletedFull.filter(
+    (item) => item.category === "Rice, Grains & Beans"
+  );
+  // Select uncompleted shopping items - Oils, Spices etc.
+  const shoppingItemsUncompleteOilsSpices = shoppingItemsUncompleteFull.filter(
+    (item) => item.category === "Oils, Spices etc."
+  );
+  // Select completed shopping items - Oils, Spices etc.
+  const shoppingItemsCompletedOilsSpices = shoppingItemsCompletedFull.filter(
+    (item) => item.category === "Oils, Spices etc."
+  );
+  // Select uncompleted shopping items - Drinks
+  const shoppingItemsUncompleteDrinks = shoppingItemsUncompleteFull.filter(
+    (item) => item.category === "Drinks"
+  );
+  // Select completed shopping items - Drinks
+  const shoppingItemsCompletedDrinks = shoppingItemsCompletedFull.filter(
+    (item) => item.category === "Drinks"
+  );
+  // Select uncompleted shopping items - Other
+  const shoppingItemsUncompleteOther = shoppingItemsUncompleteFull.filter(
+    (item) => item.category === "Other" || item.category === ""
+  );
+  // Select completed shopping items - Other
+  const shoppingItemsCompletedOther = shoppingItemsCompletedFull.filter(
+    (item) => item.category === "Other" || item.category === ""
+  );
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -66,14 +127,6 @@ const ShoppingListBox = () => {
     setValue(newValue);
   };
 
-  const [state, setState] = useState({
-    checkedA: false,
-    checkedB: false,
-  });
-
-  const handleTick = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
   return (
     <div className={classes.root}>
       <Tabs
@@ -84,70 +137,97 @@ const ShoppingListBox = () => {
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        <Tab label="Full List" {...a11yProps(0)} />
-        <Tab label="Fruits & Vegetables" {...a11yProps(1)} />
-        <Tab label="Bakery" {...a11yProps(2)} />
-        <Tab label="Meat & Seafood" {...a11yProps(3)} />
-        <Tab label="Dairy, Cheese & Eggs" {...a11yProps(4)} />
-        <Tab label="Rice, Grains & Beans" {...a11yProps(5)} />
-        <Tab label="Oils, Spices etc." {...a11yProps(6)} />
-        <Tab label="Add Other Items" {...a11yProps(7)} />
+        <Tab
+          label={`Full List(${shoppingItemsUncompleteFull.length})`}
+          {...a11yProps(0)}
+        />
+        <Tab
+          label={`Fruits & Vegetables(${shoppingItemsUncompleteFruitsVegetables.length})`}
+          {...a11yProps(1)}
+        />
+        <Tab
+          label={`Bakery(${shoppingItemsUncompleteBakery.length})`}
+          {...a11yProps(2)}
+        />
+        <Tab
+          label={`Meat & Seafood(${shoppingItemsUncompleteMeatSeafood.length})`}
+          {...a11yProps(3)}
+        />
+        <Tab
+          label={`Dairy, Cheese & Eggs(${shoppingItemsUncompleteDairyCheeseEggs.length})`}
+          {...a11yProps(4)}
+        />
+        <Tab
+          label={`Rice, Grains & Beans(${shoppingItemsUncompleteRiceGrainsBeans.length})`}
+          {...a11yProps(5)}
+        />
+        <Tab
+          label={`Oils, Spices etc.(${shoppingItemsUncompleteOilsSpices.length})`}
+          {...a11yProps(6)}
+        />
+        <Tab
+          label={`Drinks(${shoppingItemsUncompleteDrinks.length})`}
+          {...a11yProps(7)}
+        />
+        <Tab
+          label={`Other(${shoppingItemsUncompleteOther.length})`}
+          {...a11yProps(8)}
+        />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <ul>
-          {shoppingList.map((item) => (
-            <li key={item.id}>
-              {item.name} - {item.items} {item.unit}(s), {item.size}
-            </li>
-          ))}
-        </ul>
+        <ShoppingListTab
+          shoppingItemsUncomplete={shoppingItemsUncompleteFull}
+          shoppingItemsCompleted={shoppingItemsCompletedFull}
+          tag="full"
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ul>
-          <li>Avocados - 6</li>
-          <li>Garlic - 4 cloves</li>
-          <li>Carrots - 3 medium</li>
-          <li>Red Onions - 1 small</li>
-        </ul>
+        <ShoppingListTab
+          shoppingItemsUncomplete={shoppingItemsUncompleteFruitsVegetables}
+          shoppingItemsCompleted={shoppingItemsCompletedFruitsVegetables}
+        />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={state.checkedA}
-                onChange={handleTick}
-                name="checkedA"
-              />
-            }
-            label="Bread"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={state.checkedB}
-                onChange={handleTick}
-                name="checkedB"
-              />
-            }
-            label="Croissants"
-          />
-        </FormGroup>
+        <ShoppingListTab
+          shoppingItemsUncomplete={shoppingItemsUncompleteBakery}
+          shoppingItemsCompleted={shoppingItemsCompletedBakery}
+        />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Item Three
+        <ShoppingListTab
+          shoppingItemsUncomplete={shoppingItemsUncompleteMeatSeafood}
+          shoppingItemsCompleted={shoppingItemsCompletedMeatSeafood}
+        />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        Item Four
+        <ShoppingListTab
+          shoppingItemsUncomplete={shoppingItemsUncompleteDairyCheeseEggs}
+          shoppingItemsCompleted={shoppingItemsCompletedDairyCheeseEggs}
+        />
       </TabPanel>
       <TabPanel value={value} index={5}>
-        Item Five
+        <ShoppingListTab
+          shoppingItemsUncomplete={shoppingItemsUncompleteRiceGrainsBeans}
+          shoppingItemsCompleted={shoppingItemsCompletedRiceGrainsBeans}
+        />
       </TabPanel>
       <TabPanel value={value} index={6}>
-        Item Six
+        <ShoppingListTab
+          shoppingItemsUncomplete={shoppingItemsUncompleteOilsSpices}
+          shoppingItemsCompleted={shoppingItemsCompletedOilsSpices}
+        />
       </TabPanel>
       <TabPanel value={value} index={7}>
-        Item Seven
+        <ShoppingListTab
+          shoppingItemsUncomplete={shoppingItemsUncompleteDrinks}
+          shoppingItemsCompleted={shoppingItemsCompletedDrinks}
+        />
+      </TabPanel>
+      <TabPanel value={value} index={8}>
+        <ShoppingListTab
+          shoppingItemsUncomplete={shoppingItemsUncompleteOther}
+          shoppingItemsCompleted={shoppingItemsCompletedOther}
+        />
       </TabPanel>
     </div>
   );

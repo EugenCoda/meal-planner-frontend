@@ -4,7 +4,6 @@ import allergies from "../data/allergies";
 import diets from "../data/diets";
 import ingredients from "../data/ingredients";
 import recipeList from "../data/recipes";
-import shoppingList from "../data/shoppingList";
 
 // Initial state
 const initialState = {
@@ -12,7 +11,7 @@ const initialState = {
   diets: diets,
   ingredients: ingredients,
   recipes: recipeList,
-  shoppingList: shoppingList,
+  shoppingList: [],
   error: null,
   loading: true,
 };
@@ -64,6 +63,20 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  function addShoppingItem(shoppingItem) {
+    dispatch({
+      type: "ADD_SHOPPING_ITEM",
+      payload: shoppingItem,
+    });
+  }
+
+  function markShoppingItemCompleted(id) {
+    dispatch({
+      type: "MARK_SHOPPING_ITEM_COMPLETED",
+      payload: id,
+    });
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -76,6 +89,8 @@ export const GlobalProvider = ({ children }) => {
         selectDiet,
         selectIngredient,
         selectAllergy,
+        addShoppingItem,
+        markShoppingItemCompleted,
       }}
     >
       {children}
