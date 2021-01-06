@@ -44,6 +44,12 @@ const useStyles = makeStyles((theme) => ({
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
   },
+  tab: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "0.8rem",
+      minHeight: "24px",
+    },
+  },
 }));
 
 const ShoppingListBox = () => {
@@ -138,38 +144,47 @@ const ShoppingListBox = () => {
         className={classes.tabs}
       >
         <Tab
+          className={classes.tab}
           label={`Full List(${shoppingItemsUncompleteFull.length})`}
           {...a11yProps(0)}
         />
         <Tab
+          className={classes.tab}
           label={`Fruits & Vegetables(${shoppingItemsUncompleteFruitsVegetables.length})`}
           {...a11yProps(1)}
         />
         <Tab
+          className={classes.tab}
           label={`Bakery(${shoppingItemsUncompleteBakery.length})`}
           {...a11yProps(2)}
         />
         <Tab
+          className={classes.tab}
           label={`Meat & Seafood(${shoppingItemsUncompleteMeatSeafood.length})`}
           {...a11yProps(3)}
         />
         <Tab
+          className={classes.tab}
           label={`Dairy, Cheese & Eggs(${shoppingItemsUncompleteDairyCheeseEggs.length})`}
           {...a11yProps(4)}
         />
         <Tab
+          className={classes.tab}
           label={`Rice, Grains & Beans(${shoppingItemsUncompleteRiceGrainsBeans.length})`}
           {...a11yProps(5)}
         />
         <Tab
+          className={classes.tab}
           label={`Oils, Spices etc.(${shoppingItemsUncompleteOilsSpices.length})`}
           {...a11yProps(6)}
         />
         <Tab
+          className={classes.tab}
           label={`Drinks(${shoppingItemsUncompleteDrinks.length})`}
           {...a11yProps(7)}
         />
         <Tab
+          className={classes.tab}
           label={`Other(${shoppingItemsUncompleteOther.length})`}
           {...a11yProps(8)}
         />

@@ -82,6 +82,12 @@ export const AppReducer = (state, action) => {
           return { ...item };
         }),
       };
+    case "SET_SEARCH_FILTER":
+      return {
+        ...state,
+        loading: false,
+        searchFilter: action.payload,
+      };
     case "ERROR":
       return {
         ...state,

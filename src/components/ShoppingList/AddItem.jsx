@@ -54,7 +54,6 @@ const AddItem = () => {
             <Grid container spacing={1}>
               <Grid item style={{ padding: "20px 5px" }}>
                 <Field
-                  autoFocus
                   component={TextField}
                   name="name"
                   type="text"

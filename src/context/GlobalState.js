@@ -12,6 +12,7 @@ const initialState = {
   ingredients: ingredients,
   recipes: recipeList,
   shoppingList: [],
+  searchFilter: "",
   error: null,
   loading: true,
 };
@@ -77,6 +78,13 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  function setSearchFilter(text) {
+    dispatch({
+      type: "SET_SEARCH_FILTER",
+      payload: text,
+    });
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -85,12 +93,14 @@ export const GlobalProvider = ({ children }) => {
         ingredients: state.ingredients,
         allergies: state.allergies,
         shoppingList: state.shoppingList,
+        searchFilter: state.searchFilter,
         addToFavorites,
         selectDiet,
         selectIngredient,
         selectAllergy,
         addShoppingItem,
         markShoppingItemCompleted,
+        setSearchFilter,
       }}
     >
       {children}
