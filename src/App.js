@@ -18,8 +18,7 @@ function App() {
           <Header />
         </Grid>
         <Grid item container>
-          <Grid item xs={false} sm={1} />
-          <Grid item xs={12} sm={10}>
+          <Grid item>
             <Switch>
               <Route exact from="/" render={(props) => <Home {...props} />} />
               <Route
@@ -49,7 +48,6 @@ function App() {
               />
             </Switch>
           </Grid>
-          <Grid item xs={false} sm={1} />
         </Grid>
       </Grid>
     </GlobalProvider>

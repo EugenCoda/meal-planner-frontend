@@ -1,15 +1,7 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalState";
 import SearchIcon from "@material-ui/icons/Search";
-import {
-  Paper,
-  Typography,
-  Grid,
-  Button,
-  LinearProgress,
-} from "@material-ui/core";
-import { Formik, Form, Field } from "formik";
-import { TextField } from "formik-material-ui";
+import { Paper, Typography, Grid, Button, TextField } from "@material-ui/core";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -61,14 +53,15 @@ const SearchBox = () => {
 
   return (
     <>
-      {/* <Paper className={classes.searchPaper}>
+      <Paper className={classes.searchPaper}>
         <div className={classes.searchContainer}>
           <TextField
-            onChange={handleSearchChange}
             className={classes.searchInput}
             id="standard-search"
             label="e.g. peanut butter cookies"
             type="search"
+            value={searchFilter}
+            onChange={handleSearchChange}
           />
           <SearchIcon className={classes.searchIcon} />
         </div>
@@ -96,47 +89,7 @@ const SearchBox = () => {
             </Grid>
           </Grid>
         ) : null}
-      </Paper> */}
-      <Formik
-        initialValues={{
-          query: "",
-        }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            setSubmitting(false);
-            alert(JSON.stringify(values, null, 2));
-          }, 500);
-        }}
-      >
-        {({ submitForm, isSubmitting }) => (
-          <Form>
-            <Grid container spacing={1}>
-              <Grid item style={{ padding: "20px 5px" }}>
-                <Field
-                  component={TextField}
-                  name="query"
-                  type="text"
-                  label="e.g. peanut butter cookies"
-                  // onChange={handleSearchChange}
-                />
-              </Grid>
-
-              {isSubmitting && <LinearProgress />}
-
-              <Grid item style={{ padding: "30px 10px" }}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  disabled={isSubmitting}
-                  onClick={submitForm}
-                >
-                  Done
-                </Button>
-              </Grid>
-            </Grid>
-          </Form>
-        )}
-      </Formik>
+      </Paper>
     </>
   );
 };

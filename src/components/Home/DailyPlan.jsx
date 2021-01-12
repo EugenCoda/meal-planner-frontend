@@ -1,8 +1,8 @@
 import React from "react";
-import { Paper, Grid, CardMedia, Typography, Avatar } from "@material-ui/core";
+import { Paper, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
-import recipeList from "../../data/recipes";
+import MealType from "./MealType";
 
 const useStyles = makeStyles({
   root: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 const DailyPlan = (props) => {
   const classes = useStyles();
   const { day } = props;
-  const { recipeName, imgURL } = recipeList[0];
+
   return (
     <>
       <Typography variant="overline" className={classes.dayTitle}>
@@ -40,70 +40,10 @@ const DailyPlan = (props) => {
       </Typography>
       <Paper elevation={3} className={classes.root}>
         <Grid container direction="column">
-          <Grid item>
-            <Avatar
-              aria-label="mealType"
-              variant="square"
-              className={classes.avatar}
-            >
-              B
-            </Avatar>
-            <CardMedia
-              className={classes.media}
-              component="img"
-              alt={recipeName}
-              image={imgURL}
-              title={recipeName}
-            />
-          </Grid>
-          <Grid item>
-            <Avatar
-              aria-label="mealType"
-              variant="square"
-              className={classes.avatar}
-            >
-              L
-            </Avatar>
-            <CardMedia
-              className={classes.media}
-              component="img"
-              alt={recipeName}
-              image={imgURL}
-              title={recipeName}
-            />
-          </Grid>
-          <Grid item>
-            <Avatar
-              aria-label="mealType"
-              variant="square"
-              className={classes.avatar}
-            >
-              D
-            </Avatar>
-            <CardMedia
-              className={classes.media}
-              component="img"
-              alt={recipeName}
-              image={imgURL}
-              title={recipeName}
-            />
-          </Grid>
-          <Grid item>
-            <Avatar
-              aria-label="mealType"
-              variant="square"
-              className={classes.avatar}
-            >
-              S
-            </Avatar>
-            <CardMedia
-              className={classes.media}
-              component="img"
-              alt={recipeName}
-              image={imgURL}
-              title={recipeName}
-            />
-          </Grid>
+          <MealType mealType="Breakfast" />
+          <MealType mealType="Lunch" />
+          <MealType mealType="Dinner" />
+          <MealType mealType="Snack" />
 
           <Grid item container direction="column">
             <Typography variant="caption">Calories: 2.100</Typography>

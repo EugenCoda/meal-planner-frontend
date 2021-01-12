@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GlobalContext } from "../../context/GlobalState";
 import { Typography } from "@material-ui/core";
 
 const CurrentWeek = () => {
+  const { dates } = useContext(GlobalContext);
+  const { today, currentWeek, currentYear } = dates;
   return (
-    <div>
-      <Typography variant="h5" align="center" paragraph>
-        Current Week: December 21 - December 27
+    <>
+      <Typography>Today is: {today}</Typography>
+      <Typography>
+        Week number is: {currentWeek} of year
+        {" " + currentYear}
       </Typography>
-    </div>
+    </>
   );
 };
 
