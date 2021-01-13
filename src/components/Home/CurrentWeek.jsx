@@ -1,10 +1,7 @@
-import React, { useContext } from "react";
-import { GlobalContext } from "../../context/GlobalState";
+import React from "react";
 import { Typography } from "@material-ui/core";
 
-const CurrentWeek = () => {
-  const { dates } = useContext(GlobalContext);
-  const { today, currentWeek, currentYear } = dates;
+const CurrentWeek = ({ today, currentWeek, currentYear }) => {
   return (
     <>
       <Typography>Today is: {today}</Typography>

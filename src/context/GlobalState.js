@@ -4,7 +4,6 @@ import allergies from "../data/allergies";
 import diets from "../data/diets";
 import ingredients from "../data/ingredients";
 import recipeList from "../data/recipes";
-import moment from "moment";
 
 // Initial state
 const initialState = {
@@ -12,72 +11,11 @@ const initialState = {
   diets: diets,
   ingredients: ingredients,
   recipes: recipeList,
+  weeklyPlan: [],
   shoppingList: [],
   searchFilter: "",
   error: null,
   loading: true,
-  dates: {
-    today: moment().format("LL").toString(),
-    currentWeek: moment().isoWeek().toString(),
-    currentYear: moment().year().toString(),
-    weekDays: [
-      {
-        id: 1,
-        weekDay: "Monday",
-        date: moment().startOf("isoWeek").format("ddd DD").toString(),
-      },
-      {
-        id: 2,
-        weekDay: "Tuesday",
-        date: moment()
-          .startOf("isoWeek")
-          .add(1, "d")
-          .format("ddd DD")
-          .toString(),
-      },
-      {
-        id: 3,
-        weekDay: "Wednesday",
-        date: moment()
-          .startOf("isoWeek")
-          .add(2, "d")
-          .format("ddd DD")
-          .toString(),
-      },
-      {
-        id: 4,
-        weekDay: "Thursday",
-        date: moment()
-          .startOf("isoWeek")
-          .add(3, "d")
-          .format("ddd DD")
-          .toString(),
-      },
-      {
-        id: 5,
-        weekDay: "Friday",
-        date: moment()
-          .startOf("isoWeek")
-          .add(4, "d")
-          .format("ddd DD")
-          .toString(),
-      },
-      {
-        id: 6,
-        weekDay: "Saturday",
-        date: moment()
-          .startOf("isoWeek")
-          .add(5, "d")
-          .format("ddd DD")
-          .toString(),
-      },
-      {
-        id: 7,
-        weekDay: "Sunday",
-        date: moment().endOf("isoWeek").format("ddd DD").toString(),
-      },
-    ],
-  },
 };
 
 const getLocalStorage = () => {
@@ -100,6 +38,13 @@ export const GlobalProvider = ({ children }) => {
   }, [state]);
 
   //Actions
+  function addToWeeklyPlan(recipe) {
+    dispatch({
+      type: "ADD_WEEKLY_PLAN",
+      payload: recipe,
+    });
+  }
+
   function addToFavorites(recipeId) {
     dispatch({
       type: "ADD_FAVORITES",
@@ -156,8 +101,9 @@ export const GlobalProvider = ({ children }) => {
         ingredients: state.ingredients,
         allergies: state.allergies,
         shoppingList: state.shoppingList,
+        weeklyPlan: state.weeklyPlan,
         searchFilter: state.searchFilter,
-        dates: state.dates,
+        addToWeeklyPlan,
         addToFavorites,
         selectDiet,
         selectIngredient,

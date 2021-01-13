@@ -6,6 +6,12 @@ export const AppReducer = (state, action) => {
         loading: false,
         recipes: action.payload,
       };
+    case "ADD_WEEKLY_PLAN":
+      return {
+        ...state,
+        loading: false,
+        weeklyPlan: [...state.weeklyPlan, action.payload],
+      };
     case "ADD_FAVORITES":
       return {
         ...state,

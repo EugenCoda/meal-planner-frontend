@@ -1,7 +1,6 @@
 import React from "react";
 import { Paper, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { red } from "@material-ui/core/colors";
 import MealType from "./MealType";
 
 const useStyles = makeStyles({
@@ -12,21 +11,6 @@ const useStyles = makeStyles({
   dayTitle: {
     textAlign: "center",
   },
-  media: {
-    width: 100,
-    height: 100,
-    top: 0,
-    left: 0,
-    zIndex: 1,
-  },
-  avatar: {
-    backgroundColor: red[500],
-    width: 20,
-    height: 20,
-    top: "20px",
-    left: 0,
-    zIndex: 2,
-  },
 });
 
 const DailyPlan = (props) => {
@@ -36,14 +20,14 @@ const DailyPlan = (props) => {
   return (
     <>
       <Typography variant="overline" className={classes.dayTitle}>
-        {day}
+        {day.date}
       </Typography>
       <Paper elevation={3} className={classes.root}>
         <Grid container direction="column">
-          <MealType mealType="Breakfast" />
-          <MealType mealType="Lunch" />
-          <MealType mealType="Dinner" />
-          <MealType mealType="Snack" />
+          <MealType mealType="Breakfast" day={day} />
+          <MealType mealType="Lunch" day={day} />
+          <MealType mealType="Dinner" day={day} />
+          <MealType mealType="Snack" day={day} />
 
           <Grid item container direction="column">
             <Typography variant="caption">Calories: 2.100</Typography>
