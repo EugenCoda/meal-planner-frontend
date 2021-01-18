@@ -87,7 +87,11 @@ const Home = () => {
             {dates.weekDays.map((day) => {
               return (
                 <Grid key={day.id} item>
-                  <DailyPlan day={day} />
+                  <DailyPlan
+                    day={day}
+                    currentWeek={dates.currentWeek}
+                    currentYear={dates.currentYear}
+                  />
                 </Grid>
               );
             })}

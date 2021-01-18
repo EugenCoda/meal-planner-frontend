@@ -17,7 +17,6 @@ import {
 
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import RecipeCardSmall from "../RecipeCardSmall";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
@@ -42,8 +41,11 @@ const MealType = (props) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const { mealType, day } = props;
-  const { recipes } = useContext(GlobalContext);
+  const { mealType, day, currentWeek, currentYear } = props;
+  const { recipes, weeklyPlan, addToWeeklyPlan, createDayPlan } = useContext(
+    GlobalContext
+  );
+  let selectedDate = currentYear + currentWeek + day.date;
 
   // Select all favorite recipes
   const favoriteRecipes = recipes.filter((recipe) => recipe.isFavorite);
@@ -70,7 +72,29 @@ const MealType = (props) => {
   const handleClickOpen = () => {
     setOpen(true);
   };
+  // Close Dialog if clicked away or Cancel
+  const handleCancel = () => {
+    setOpen(false);
+  };
+  // Close Dialog if clicked Add to Calendar
   const handleClose = () => {
+    if (weeklyPlan.length === 0) {
+      createDayPlan(selectedDate);
+      addToWeeklyPlan(selectedRecipe, selectedDate, mealType);
+    } else {
+      let found = false;
+      weeklyPlan.forEach((item) => {
+        if (item.id === selectedDate) {
+          addToWeeklyPlan(selectedRecipe, selectedDate, mealType);
+          found = true;
+          return;
+        }
+      });
+      if (!found) {
+        createDayPlan(selectedDate);
+        addToWeeklyPlan(selectedRecipe, selectedDate, mealType);
+      }
+    }
     setOpen(false);
   };
 
@@ -79,6 +103,13 @@ const MealType = (props) => {
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
+  };
+
+  // Recipe Button actions
+  const [selectedRecipe, setSelectedRecipe] = useState({});
+
+  const handleRecipeButtonClick = (recipe) => {
+    setSelectedRecipe(recipe);
   };
 
   return (
@@ -90,7 +121,7 @@ const MealType = (props) => {
       <Dialog
         fullScreen={fullScreen}
         open={open}
-        onClose={handleClose}
+        onClose={handleCancel}
         aria-labelledby="responsive-dialog-title"
       >
         <DialogTitle id="responsive-dialog-title">
@@ -111,7 +142,19 @@ const MealType = (props) => {
               </AccordionSummary>
               <AccordionDetails>
                 {favoriteBreakfastRecipes.map((recipe) => (
-                  <RecipeCardSmall key={recipe.id} recipe={recipe} day={day} />
+                  <Button
+                    key={recipe.id}
+                    style={
+                      selectedRecipe.id === recipe.id
+                        ? { backgroundColor: "green" }
+                        : null
+                    }
+                    onClick={() => {
+                      handleRecipeButtonClick(recipe);
+                    }}
+                  >
+                    {recipe.recipeName}
+                  </Button>
                 ))}
               </AccordionDetails>
             </Accordion>
@@ -128,7 +171,19 @@ const MealType = (props) => {
               </AccordionSummary>
               <AccordionDetails>
                 {favoriteLunchRecipes.map((recipe) => (
-                  <RecipeCardSmall key={recipe.id} recipe={recipe} day={day} />
+                  <Button
+                    key={recipe.id}
+                    style={
+                      selectedRecipe.id === recipe.id
+                        ? { backgroundColor: "green" }
+                        : null
+                    }
+                    onClick={() => {
+                      handleRecipeButtonClick(recipe);
+                    }}
+                  >
+                    {recipe.recipeName}
+                  </Button>
                 ))}
               </AccordionDetails>
             </Accordion>
@@ -145,7 +200,19 @@ const MealType = (props) => {
               </AccordionSummary>
               <AccordionDetails>
                 {favoriteDinnerRecipes.map((recipe) => (
-                  <RecipeCardSmall key={recipe.id} recipe={recipe} day={day} />
+                  <Button
+                    key={recipe.id}
+                    style={
+                      selectedRecipe.id === recipe.id
+                        ? { backgroundColor: "green" }
+                        : null
+                    }
+                    onClick={() => {
+                      handleRecipeButtonClick(recipe);
+                    }}
+                  >
+                    {recipe.recipeName}
+                  </Button>
                 ))}
               </AccordionDetails>
             </Accordion>
@@ -162,14 +229,26 @@ const MealType = (props) => {
               </AccordionSummary>
               <AccordionDetails>
                 {favoriteSnackRecipes.map((recipe) => (
-                  <RecipeCardSmall key={recipe.id} recipe={recipe} day={day} />
+                  <Button
+                    key={recipe.id}
+                    style={
+                      selectedRecipe.id === recipe.id
+                        ? { backgroundColor: "green" }
+                        : null
+                    }
+                    onClick={() => {
+                      handleRecipeButtonClick(recipe);
+                    }}
+                  >
+                    {recipe.recipeName}
+                  </Button>
                 ))}
               </AccordionDetails>
             </Accordion>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
+          <Button autoFocus onClick={handleCancel} color="primary">
             Cancel
           </Button>
           <Button onClick={handleClose} color="primary" autoFocus>

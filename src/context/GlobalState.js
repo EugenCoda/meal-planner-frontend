@@ -38,10 +38,17 @@ export const GlobalProvider = ({ children }) => {
   }, [state]);
 
   //Actions
-  function addToWeeklyPlan(recipe) {
+  function createDayPlan(selectedDate) {
+    dispatch({
+      type: "CREATE_DAILY_PLAN",
+      payload: selectedDate,
+    });
+  }
+
+  function addToWeeklyPlan(recipe, selectedDate, mealType) {
     dispatch({
       type: "ADD_WEEKLY_PLAN",
-      payload: recipe,
+      payload: { recipe, selectedDate, mealType },
     });
   }
 
@@ -103,6 +110,7 @@ export const GlobalProvider = ({ children }) => {
         shoppingList: state.shoppingList,
         weeklyPlan: state.weeklyPlan,
         searchFilter: state.searchFilter,
+        createDayPlan,
         addToWeeklyPlan,
         addToFavorites,
         selectDiet,

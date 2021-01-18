@@ -6,11 +6,45 @@ export const AppReducer = (state, action) => {
         loading: false,
         recipes: action.payload,
       };
+    case "CREATE_DAILY_PLAN":
+      return {
+        ...state,
+        loading: false,
+        weeklyPlan: [...state.weeklyPlan, { id: action.payload }],
+      };
     case "ADD_WEEKLY_PLAN":
       return {
         ...state,
         loading: false,
-        weeklyPlan: [...state.weeklyPlan, action.payload],
+        weeklyPlan: state.weeklyPlan.map((item) => {
+          if (item.id === action.payload.selectedDate) {
+            if (action.payload.mealType === "Breakfast") {
+              return {
+                ...item,
+                breakfast: action.payload.recipe,
+              };
+            }
+            if (action.payload.mealType === "Lunch") {
+              return {
+                ...item,
+                lunch: action.payload.recipe,
+              };
+            }
+            if (action.payload.mealType === "Dinner") {
+              return {
+                ...item,
+                dinner: action.payload.recipe,
+              };
+            }
+            if (action.payload.mealType === "Snack") {
+              return {
+                ...item,
+                snack: action.payload.recipe,
+              };
+            }
+          }
+          return { ...item };
+        }),
       };
     case "ADD_FAVORITES":
       return {
