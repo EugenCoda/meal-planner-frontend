@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -30,6 +31,7 @@ const useStyles = makeStyles({
 const RecipeCard = (props) => {
   const { addToFavorites } = useContext(GlobalContext);
   const classes = useStyles();
+  let history = useHistory();
   const {
     id,
     recipeName,
@@ -37,7 +39,6 @@ const RecipeCard = (props) => {
     recipeURL,
     imgURL,
     isFavorite,
-    history,
   } = props;
 
   return (

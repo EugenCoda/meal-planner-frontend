@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Favorites = (props) => {
+const Favorites = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const tabsProps = {
@@ -84,7 +84,7 @@ const Favorites = (props) => {
   const favoriteDessertRecipes = favoriteRecipes.filter(
     (recipe) => recipe.mealType === "dessert"
   );
-  const { history } = props;
+
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
@@ -138,38 +138,32 @@ const Favorites = (props) => {
       </Paper>
       <TabPanel value={value} index={0}>
         <Grid container spacing={1} className={classes.recipesContainer}>
-          {favoriteRecipes.map((recipe) => getRecipeCard(recipe, history))}
+          {favoriteRecipes.map((recipe) => getRecipeCard(recipe))}
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Grid container spacing={1} className={classes.recipesContainer}>
-          {favoriteBreakfastRecipes.map((recipe) =>
-            getRecipeCard(recipe, history)
-          )}
+          {favoriteBreakfastRecipes.map((recipe) => getRecipeCard(recipe))}
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Grid container spacing={1} className={classes.recipesContainer}>
-          {favoriteLunchRecipes.map((recipe) => getRecipeCard(recipe, history))}
+          {favoriteLunchRecipes.map((recipe) => getRecipeCard(recipe))}
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={3}>
         <Grid container spacing={1} className={classes.recipesContainer}>
-          {favoriteDinnerRecipes.map((recipe) =>
-            getRecipeCard(recipe, history)
-          )}
+          {favoriteDinnerRecipes.map((recipe) => getRecipeCard(recipe))}
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={4}>
         <Grid container spacing={1} className={classes.recipesContainer}>
-          {favoriteDessertRecipes.map((recipe) =>
-            getRecipeCard(recipe, history)
-          )}
+          {favoriteDessertRecipes.map((recipe) => getRecipeCard(recipe))}
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={5}>
         <Grid container spacing={1} className={classes.recipesContainer}>
-          {favoriteSnackRecipes.map((recipe) => getRecipeCard(recipe, history))}
+          {favoriteSnackRecipes.map((recipe) => getRecipeCard(recipe))}
         </Grid>
       </TabPanel>
     </>

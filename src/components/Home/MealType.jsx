@@ -15,6 +15,8 @@ import {
   AccordionSummary,
 } from "@material-ui/core";
 
+import MealCard from "./MealCard";
+
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
@@ -24,15 +26,10 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   root: {
-    minHeight: "80px",
-    minWidth: "120px",
-  },
-  media: {
-    width: 100,
-    height: 100,
-    top: 0,
-    left: 0,
-    zIndex: 1,
+    minHeight: 160,
+    minWidth: 120,
+    height: 160,
+    width: 120,
   },
 });
 
@@ -46,6 +43,8 @@ const MealType = (props) => {
     GlobalContext
   );
   let selectedDate = currentYear + currentWeek + day.date;
+
+  const dailyPlan = weeklyPlan.filter((item) => item.id === selectedDate);
 
   // Select all favorite recipes
   const favoriteRecipes = recipes.filter((recipe) => recipe.isFavorite);
@@ -113,149 +112,174 @@ const MealType = (props) => {
   };
 
   return (
-    <Grid item container direction="column" className={classes.root}>
-      <Typography variant="overline">{mealType}</Typography>
-      <IconButton aria-label="add meal" onClick={handleClickOpen}>
-        {<AddCircleOutlineIcon fontSize="large" />}
-      </IconButton>
-      <Dialog
-        fullScreen={fullScreen}
-        open={open}
-        onClose={handleCancel}
-        aria-labelledby="responsive-dialog-title"
-      >
-        <DialogTitle id="responsive-dialog-title">
-          {"Click on a recipe to select it"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            <Accordion
-              expanded={expanded === "panel1"}
-              onChange={handleChange("panel1")}
-            >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
+    <Grid
+      item
+      container
+      direction="column"
+      alignItems="center"
+      className={classes.root}
+    >
+      <Grid item>
+        <Typography variant="overline">{mealType}</Typography>
+      </Grid>
+      <Grid item>
+        {((mealType === "Breakfast" &&
+          dailyPlan[0] &&
+          dailyPlan[0].breakfast) ||
+          (mealType === "Lunch" && dailyPlan[0] && dailyPlan[0].lunch) ||
+          (mealType === "Dinner" && dailyPlan[0] && dailyPlan[0].dinner) ||
+          (mealType === "Snack" && dailyPlan[0] && dailyPlan[0].snack)) && (
+          <MealCard mealType={mealType} dailyPlan={dailyPlan[0]} />
+        )}
+
+        {(mealType === "Breakfast" && dailyPlan[0] && dailyPlan[0].breakfast) ||
+        (mealType === "Lunch" && dailyPlan[0] && dailyPlan[0].lunch) ||
+        (mealType === "Dinner" && dailyPlan[0] && dailyPlan[0].dinner) ||
+        (mealType === "Snack" && dailyPlan[0] && dailyPlan[0].snack) ? null : (
+          <IconButton aria-label="add meal" onClick={handleClickOpen}>
+            {<AddCircleOutlineIcon fontSize="large" />}
+          </IconButton>
+        )}
+
+        <Dialog
+          fullScreen={fullScreen}
+          open={open}
+          onClose={handleCancel}
+          aria-labelledby="responsive-dialog-title"
+        >
+          <DialogTitle id="responsive-dialog-title">
+            {"Click on a recipe to select it"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <Accordion
+                expanded={expanded === "panel1"}
+                onChange={handleChange("panel1")}
               >
-                <Typography className={classes.heading}>Breakfast</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                {favoriteBreakfastRecipes.map((recipe) => (
-                  <Button
-                    key={recipe.id}
-                    style={
-                      selectedRecipe.id === recipe.id
-                        ? { backgroundColor: "green" }
-                        : null
-                    }
-                    onClick={() => {
-                      handleRecipeButtonClick(recipe);
-                    }}
-                  >
-                    {recipe.recipeName}
-                  </Button>
-                ))}
-              </AccordionDetails>
-            </Accordion>
-            <Accordion
-              expanded={expanded === "panel2"}
-              onChange={handleChange("panel2")}
-            >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel2bh-content"
-                id="panel2bh-header"
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1bh-content"
+                  id="panel1bh-header"
+                >
+                  <Typography className={classes.heading}>Breakfast</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  {favoriteBreakfastRecipes.map((recipe) => (
+                    <Button
+                      key={recipe.id}
+                      style={
+                        selectedRecipe.id === recipe.id
+                          ? { backgroundColor: "green" }
+                          : null
+                      }
+                      onClick={() => {
+                        handleRecipeButtonClick(recipe);
+                      }}
+                    >
+                      {recipe.recipeName}
+                    </Button>
+                  ))}
+                </AccordionDetails>
+              </Accordion>
+              <Accordion
+                expanded={expanded === "panel2"}
+                onChange={handleChange("panel2")}
               >
-                <Typography className={classes.heading}>Lunch</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                {favoriteLunchRecipes.map((recipe) => (
-                  <Button
-                    key={recipe.id}
-                    style={
-                      selectedRecipe.id === recipe.id
-                        ? { backgroundColor: "green" }
-                        : null
-                    }
-                    onClick={() => {
-                      handleRecipeButtonClick(recipe);
-                    }}
-                  >
-                    {recipe.recipeName}
-                  </Button>
-                ))}
-              </AccordionDetails>
-            </Accordion>
-            <Accordion
-              expanded={expanded === "panel3"}
-              onChange={handleChange("panel3")}
-            >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel3bh-content"
-                id="panel3bh-header"
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel2bh-content"
+                  id="panel2bh-header"
+                >
+                  <Typography className={classes.heading}>Lunch</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  {favoriteLunchRecipes.map((recipe) => (
+                    <Button
+                      key={recipe.id}
+                      style={
+                        selectedRecipe.id === recipe.id
+                          ? { backgroundColor: "green" }
+                          : null
+                      }
+                      onClick={() => {
+                        handleRecipeButtonClick(recipe);
+                      }}
+                    >
+                      {recipe.recipeName}
+                    </Button>
+                  ))}
+                </AccordionDetails>
+              </Accordion>
+              <Accordion
+                expanded={expanded === "panel3"}
+                onChange={handleChange("panel3")}
               >
-                <Typography className={classes.heading}>Dinner</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                {favoriteDinnerRecipes.map((recipe) => (
-                  <Button
-                    key={recipe.id}
-                    style={
-                      selectedRecipe.id === recipe.id
-                        ? { backgroundColor: "green" }
-                        : null
-                    }
-                    onClick={() => {
-                      handleRecipeButtonClick(recipe);
-                    }}
-                  >
-                    {recipe.recipeName}
-                  </Button>
-                ))}
-              </AccordionDetails>
-            </Accordion>
-            <Accordion
-              expanded={expanded === "panel4"}
-              onChange={handleChange("panel4")}
-            >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel4bh-content"
-                id="panel4bh-header"
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel3bh-content"
+                  id="panel3bh-header"
+                >
+                  <Typography className={classes.heading}>Dinner</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  {favoriteDinnerRecipes.map((recipe) => (
+                    <Button
+                      key={recipe.id}
+                      style={
+                        selectedRecipe.id === recipe.id
+                          ? { backgroundColor: "green" }
+                          : null
+                      }
+                      onClick={() => {
+                        handleRecipeButtonClick(recipe);
+                      }}
+                    >
+                      {recipe.recipeName}
+                    </Button>
+                  ))}
+                </AccordionDetails>
+              </Accordion>
+              <Accordion
+                expanded={expanded === "panel4"}
+                onChange={handleChange("panel4")}
               >
-                <Typography className={classes.heading}>Snack</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                {favoriteSnackRecipes.map((recipe) => (
-                  <Button
-                    key={recipe.id}
-                    style={
-                      selectedRecipe.id === recipe.id
-                        ? { backgroundColor: "green" }
-                        : null
-                    }
-                    onClick={() => {
-                      handleRecipeButtonClick(recipe);
-                    }}
-                  >
-                    {recipe.recipeName}
-                  </Button>
-                ))}
-              </AccordionDetails>
-            </Accordion>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleCancel} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            Add to calendar
-          </Button>
-        </DialogActions>
-      </Dialog>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <Typography className={classes.heading}>Snack</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  {favoriteSnackRecipes.map((recipe) => (
+                    <Button
+                      key={recipe.id}
+                      style={
+                        selectedRecipe.id === recipe.id
+                          ? { backgroundColor: "green" }
+                          : null
+                      }
+                      onClick={() => {
+                        handleRecipeButtonClick(recipe);
+                      }}
+                    >
+                      {recipe.recipeName}
+                    </Button>
+                  ))}
+                </AccordionDetails>
+              </Accordion>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button autoFocus onClick={handleCancel} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleClose} color="primary" autoFocus>
+              Add to calendar
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Grid>
     </Grid>
   );
 };

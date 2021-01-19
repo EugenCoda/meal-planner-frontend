@@ -1,0 +1,184 @@
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import {
+  Tooltip,
+  IconButton,
+  Typography,
+  Card,
+  CardActionArea,
+  CardMedia,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+} from "@material-ui/core";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import CloseIcon from "@material-ui/icons/Close";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginRight: 50,
+    padding: theme.spacing(2),
+  },
+  media: {
+    width: 120,
+    height: 120,
+  },
+  recipeModal: {
+    // width: "100%",
+    // maxWidth: 400,
+    // height: 200,
+    // objectFit: "cover",
+  },
+  closeButton: {
+    position: "absolute",
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
+}));
+
+const DialogTitle = (props) => {
+  const { children, onClose, ...other } = props;
+  const classes = useStyles();
+  return (
+    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="h6">{children}</Typography>
+      {onClose ? (
+        <Tooltip
+          title="Close Window"
+          aria-label="meal card"
+          placement="bottom-end"
+        >
+          <IconButton
+            aria-label="close"
+            className={classes.closeButton}
+            onClick={onClose}
+          >
+            <CloseIcon />
+          </IconButton>
+        </Tooltip>
+      ) : null}
+    </MuiDialogTitle>
+  );
+};
+
+const MealCard = (props) => {
+  const classes = useStyles();
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  let history = useHistory();
+  const { mealType, dailyPlan } = props;
+  const { breakfast, lunch, dinner, snack } = dailyPlan;
+  let id, recipeName, imgURL;
+  switch (mealType) {
+    case "Breakfast":
+      id = breakfast.id;
+      recipeName = breakfast.recipeName;
+      imgURL = breakfast.imgURL;
+      break;
+    case "Lunch":
+      id = lunch.id;
+      recipeName = lunch.recipeName;
+      imgURL = lunch.imgURL;
+      break;
+    case "Dinner":
+      id = dinner.id;
+      recipeName = dinner.recipeName;
+      imgURL = dinner.imgURL;
+      break;
+    default:
+      id = snack.id;
+      recipeName = snack.recipeName;
+      imgURL = snack.imgURL;
+      break;
+  }
+
+  // Handle Actions for Dialog
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  // Close Dialog if clicked away or X
+  const handleCancel = () => {
+    setOpen(false);
+  };
+  // Close Dialog if clicked Remove
+  const handleRemove = () => {
+    //   TODO
+    setOpen(false);
+  };
+  // Close Dialog if clicked Edit
+  const handleEdit = () => {
+    //   TODO
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <Card className={classes.media}>
+        <CardActionArea onClick={handleClickOpen}>
+          <CardMedia
+            component="img"
+            alt={recipeName}
+            image={imgURL}
+            title={recipeName}
+          />
+        </CardActionArea>
+      </Card>
+      <Dialog
+        fullScreen={fullScreen}
+        open={open}
+        onClose={handleCancel}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle id="responsive-dialog-title" onClose={handleCancel}>
+          {recipeName}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <Card className={classes.media}>
+              <CardActionArea onClick={() => history.push(`/recipe/${id}`)}>
+                <CardMedia
+                  className={classes.recipeModal}
+                  component="img"
+                  alt={recipeName}
+                  image={imgURL}
+                  title={recipeName}
+                />
+              </CardActionArea>
+            </Card>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Tooltip
+            title="Remove From Meal Plan"
+            aria-label="meal card"
+            placement="top"
+          >
+            <IconButton onClick={handleRemove}>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip
+            title="Edit Meal Choice"
+            aria-label="meal card"
+            placement="top"
+          >
+            <IconButton onClick={handleEdit}>
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+};
+
+export default MealCard;

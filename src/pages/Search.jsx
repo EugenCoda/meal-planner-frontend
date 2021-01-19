@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
 import { Box, Grid } from "@material-ui/core";
 import SearchBox from "../components/Search/SearchBox";
 import { getRecipeCard } from "../utils/getRecipeCard";
 
-const Search = (props) => {
+const Search = () => {
   const { recipes, searchFilter } = useContext(GlobalContext);
-  const { history } = props;
+  let history = useHistory();
 
   return (
     <Box>
