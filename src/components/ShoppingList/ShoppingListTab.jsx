@@ -1,9 +1,11 @@
 import React from "react";
 import ShoppingListItem from "./ShoppingListItem";
 
-const ShoppingListTab = (props) => {
-  const { shoppingItemsUncomplete, shoppingItemsCompleted, tag } = props;
-
+const ShoppingListTab = ({
+  shoppingItemsUncomplete,
+  shoppingItemsCompleted,
+  tag,
+}) => {
   return (
     <>
       <ShoppingListItem shoppingItems={shoppingItemsUncomplete} tag={tag} />

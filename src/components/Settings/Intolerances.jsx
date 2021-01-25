@@ -22,6 +22,8 @@ const useStyles = makeStyles({
 
 const Intolerances = () => {
   const classes = useStyles();
+
+  // Items from Global Context
   const { allergies, selectAllergy } = useContext(GlobalContext);
 
   return (

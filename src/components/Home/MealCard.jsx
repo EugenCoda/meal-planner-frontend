@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { GlobalContext } from "../../context/GlobalState";
 import { useHistory } from "react-router-dom";
 import {
   Tooltip,
@@ -14,12 +15,12 @@ import {
 } from "@material-ui/core";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import CloseIcon from "@material-ui/icons/Close";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
+import RemoveMealButton from "./RemoveMealButton";
+import EditMealButton from "./EditMealButton";
 const useStyles = makeStyles((theme) => ({
   root: {
     marginRight: 50,
@@ -68,13 +69,17 @@ const DialogTitle = (props) => {
   );
 };
 
-const MealCard = (props) => {
+const MealCard = ({ mealType, dailyPlan }) => {
   const classes = useStyles();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   let history = useHistory();
-  const { mealType, dailyPlan } = props;
+
+  // Items from Global Context
+  const { removeFromDailyPlan, editDailyPlan } = useContext(GlobalContext);
+
   const { breakfast, lunch, dinner, snack } = dailyPlan;
+
   let id, recipeName, imgURL;
   switch (mealType) {
     case "Breakfast":
@@ -105,18 +110,18 @@ const MealCard = (props) => {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  // Close Dialog if clicked away or X
+  // Close Dialog if clicked away or "X"
   const handleCancel = () => {
     setOpen(false);
   };
-  // Close Dialog if clicked Remove
+  // Remove Meal and Close Dialog if clicked "Remove"
   const handleRemove = () => {
-    //   TODO
+    removeFromDailyPlan(dailyPlan, mealType);
     setOpen(false);
   };
-  // Close Dialog if clicked Edit
+  // Edit Meal and Close Dialog if clicked "Edit"
   const handleEdit = () => {
-    //   TODO
+    // editDailyPlan(dailyPlan, mealType);
     setOpen(false);
   };
 
@@ -157,24 +162,8 @@ const MealCard = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Tooltip
-            title="Remove From Meal Plan"
-            aria-label="meal card"
-            placement="top"
-          >
-            <IconButton onClick={handleRemove}>
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip
-            title="Edit Meal Choice"
-            aria-label="meal card"
-            placement="top"
-          >
-            <IconButton onClick={handleEdit}>
-              <EditIcon />
-            </IconButton>
-          </Tooltip>
+          <RemoveMealButton handleRemove={handleRemove} />
+          <EditMealButton handleEdit={handleEdit} />
         </DialogActions>
       </Dialog>
     </>

@@ -13,9 +13,8 @@ const useStyles = makeStyles({
   },
 });
 
-const DailyPlan = (props) => {
+const DailyPlan = ({ day, currentWeek, currentYear }) => {
   const classes = useStyles();
-  const { day, currentWeek, currentYear } = props;
 
   return (
     <>

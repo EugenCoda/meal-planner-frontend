@@ -38,17 +38,31 @@ export const GlobalProvider = ({ children }) => {
   }, [state]);
 
   //Actions
-  function createDayPlan(selectedDate) {
+  function createDailyPlan(selectedDate) {
     dispatch({
       type: "CREATE_DAILY_PLAN",
       payload: selectedDate,
     });
   }
 
-  function addToWeeklyPlan(recipe, selectedDate, mealType) {
+  function addToDailyPlan(recipe, selectedDate, mealType) {
     dispatch({
-      type: "ADD_WEEKLY_PLAN",
+      type: "ADD_TO_DAILY_PLAN",
       payload: { recipe, selectedDate, mealType },
+    });
+  }
+
+  function removeFromDailyPlan(dailyPlan, mealType) {
+    dispatch({
+      type: "REMOVE_FROM_DAILY_PLAN",
+      payload: { dailyPlan, mealType },
+    });
+  }
+
+  function editDailyPlan(dailyPlan, mealType) {
+    dispatch({
+      type: "EDIT_DAILY_PLAN",
+      payload: { dailyPlan, mealType },
     });
   }
 
@@ -110,8 +124,10 @@ export const GlobalProvider = ({ children }) => {
         shoppingList: state.shoppingList,
         weeklyPlan: state.weeklyPlan,
         searchFilter: state.searchFilter,
-        createDayPlan,
-        addToWeeklyPlan,
+        createDailyPlan,
+        addToDailyPlan,
+        removeFromDailyPlan,
+        editDailyPlan,
         addToFavorites,
         selectDiet,
         selectIngredient,

@@ -10,6 +10,7 @@ import units from "../../data/shoppingItemUnits";
 import categories from "../../data/shoppingItemCategories";
 
 const AddItem = () => {
+  // Items from Global Context
   const { addShoppingItem } = useContext(GlobalContext);
 
   return (

@@ -53,7 +53,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShoppingListBox = () => {
+  // Items from Global Context
   const { shoppingList } = useContext(GlobalContext);
+
   // Select all uncompleted shopping items
   const shoppingItemsUncompleteFull = shoppingList.filter(
     (item) => !item.isCompleted

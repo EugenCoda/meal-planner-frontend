@@ -6,8 +6,10 @@ import SearchBox from "../components/Search/SearchBox";
 import { getRecipeCard } from "../utils/getRecipeCard";
 
 const Search = () => {
-  const { recipes, searchFilter } = useContext(GlobalContext);
   let history = useHistory();
+
+  // Items from Global Context
+  const { recipes, searchFilter } = useContext(GlobalContext);
 
   return (
     <Box>

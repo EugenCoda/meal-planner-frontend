@@ -40,6 +40,8 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchBox = () => {
   const classes = useStyles();
+
+  // Items from Global Context
   const { searchFilter, setSearchFilter } = useContext(GlobalContext);
 
   const handleSearchChange = (e) => {

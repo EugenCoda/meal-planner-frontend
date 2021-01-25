@@ -3,11 +3,12 @@ import { GlobalContext } from "../context/GlobalState";
 import { Button, Link } from "@material-ui/core";
 
 const Recipe = (props) => {
-  const { recipes } = useContext(GlobalContext);
   const { match, history } = props;
   const { params } = match;
   const { recipeID } = params;
 
+  // Items from Global Context
+  const { recipes } = useContext(GlobalContext);
   const {
     id,
     recipeName,

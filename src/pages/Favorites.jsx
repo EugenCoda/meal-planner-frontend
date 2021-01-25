@@ -64,6 +64,8 @@ const Favorites = () => {
   const tabsProps = {
     orientation: isSmallScreen ? "vertical" : "horizontal",
   };
+
+  // Items from Global Context
   const { recipes } = useContext(GlobalContext);
 
   // Select all favorite recipes

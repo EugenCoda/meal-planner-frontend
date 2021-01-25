@@ -28,18 +28,19 @@ const useStyles = makeStyles({
   },
 });
 
-const RecipeCard = (props) => {
-  const { addToFavorites } = useContext(GlobalContext);
+const RecipeCard = ({
+  id,
+  recipeName,
+  recipePublisher,
+  recipeURL,
+  imgURL,
+  isFavorite,
+}) => {
   const classes = useStyles();
   let history = useHistory();
-  const {
-    id,
-    recipeName,
-    recipePublisher,
-    recipeURL,
-    imgURL,
-    isFavorite,
-  } = props;
+
+  // Items from Global Context
+  const { addToFavorites } = useContext(GlobalContext);
 
   return (
     <Card className={classes.root}>

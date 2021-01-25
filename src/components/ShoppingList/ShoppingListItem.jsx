@@ -70,12 +70,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ShoppingListItem = (props) => {
+const ShoppingListItem = ({ shoppingItems, tag }) => {
   const classes = useStyles();
   const theme = useTheme();
   const isBigScreen = useMediaQuery(theme.breakpoints.up("md"));
+
+  // Items from Global Context
   const { markShoppingItemCompleted } = useContext(GlobalContext);
-  const { shoppingItems, tag } = props;
+
   return (
     <>
       <FormGroup>

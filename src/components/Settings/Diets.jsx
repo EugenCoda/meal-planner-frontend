@@ -22,7 +22,10 @@ const useStyles = makeStyles({
 
 const Diets = () => {
   const classes = useStyles();
+
+  // Items from Global Context
   const { diets, selectDiet } = useContext(GlobalContext);
+
   return (
     <Paper className={classes.mainContainer}>
       <Typography variant="h5" className={classes.title}>
