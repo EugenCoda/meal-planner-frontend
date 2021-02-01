@@ -55,7 +55,7 @@ const SearchBox = () => {
 
   return (
     <>
-      <Paper className={classes.searchPaper}>
+      <Paper elevation={0} className={classes.searchPaper}>
         <div className={classes.searchContainer}>
           <TextField
             className={classes.searchInput}
@@ -67,9 +67,9 @@ const SearchBox = () => {
           />
           <SearchIcon className={classes.searchIcon} />
         </div>
-        <Typography variant="subtitle1" display="block" align="center">
+        {/* <Typography variant="subtitle1" display="block" align="center">
           Refine search by: Calories, Diet, Ingredients
-        </Typography>
+        </Typography> */}
         {searchFilter !== "" ? (
           <Grid item container spacing={2} className={classes.searchContainer}>
             <Grid item>

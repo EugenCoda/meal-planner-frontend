@@ -59,13 +59,6 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
-  function editDailyPlan(dailyPlan, mealType) {
-    dispatch({
-      type: "EDIT_DAILY_PLAN",
-      payload: { dailyPlan, mealType },
-    });
-  }
-
   function addToFavorites(recipeId) {
     dispatch({
       type: "ADD_FAVORITES",
@@ -127,7 +120,6 @@ export const GlobalProvider = ({ children }) => {
         createDailyPlan,
         addToDailyPlan,
         removeFromDailyPlan,
-        editDailyPlan,
         addToFavorites,
         selectDiet,
         selectIngredient,

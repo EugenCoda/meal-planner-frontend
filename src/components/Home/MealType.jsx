@@ -41,7 +41,11 @@ const MealType = ({ mealType, day, currentWeek, currentYear }) => {
         (mealType === "Lunch" && dailyPlan[0] && dailyPlan[0].lunch) ||
         (mealType === "Dinner" && dailyPlan[0] && dailyPlan[0].dinner) ||
         (mealType === "Snack" && dailyPlan[0] && dailyPlan[0].snack) ? (
-          <MealCard mealType={mealType} dailyPlan={dailyPlan[0]} />
+          <MealCard
+            mealType={mealType}
+            selectedDate={selectedDate}
+            dailyPlan={dailyPlan[0]}
+          />
         ) : (
           <AddMealButton mealType={mealType} selectedDate={selectedDate} />
         )}

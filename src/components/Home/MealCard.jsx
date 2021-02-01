@@ -69,14 +69,14 @@ const DialogTitle = (props) => {
   );
 };
 
-const MealCard = ({ mealType, dailyPlan }) => {
+const MealCard = ({ mealType, dailyPlan, selectedDate }) => {
   const classes = useStyles();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   let history = useHistory();
 
   // Items from Global Context
-  const { removeFromDailyPlan, editDailyPlan } = useContext(GlobalContext);
+  const { removeFromDailyPlan } = useContext(GlobalContext);
 
   const { breakfast, lunch, dinner, snack } = dailyPlan;
 
@@ -119,11 +119,6 @@ const MealCard = ({ mealType, dailyPlan }) => {
     removeFromDailyPlan(dailyPlan, mealType);
     setOpen(false);
   };
-  // Edit Meal and Close Dialog if clicked "Edit"
-  const handleEdit = () => {
-    // editDailyPlan(dailyPlan, mealType);
-    setOpen(false);
-  };
 
   return (
     <>
@@ -163,7 +158,7 @@ const MealCard = ({ mealType, dailyPlan }) => {
         </DialogContent>
         <DialogActions>
           <RemoveMealButton handleRemove={handleRemove} />
-          <EditMealButton handleEdit={handleEdit} />
+          <EditMealButton mealType={mealType} selectedDate={selectedDate} />
         </DialogActions>
       </Dialog>
     </>

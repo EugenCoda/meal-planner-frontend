@@ -54,4 +54,52 @@ export default [
     apiParam: "mushroom",
     isSelected: false,
   },
+  {
+    id: 10,
+    name: "Rolled Oats",
+    apiParam: "rolled+oats",
+    isSelected: false,
+  },
+  {
+    id: 11,
+    name: "Peach",
+    apiParam: "peach",
+    isSelected: false,
+  },
+  {
+    id: 12,
+    name: "Cashew Milk",
+    apiParam: "cashew+milk",
+    isSelected: false,
+  },
+  {
+    id: 13,
+    name: "Coconut Cream",
+    apiParam: "coconut+cream",
+    isSelected: false,
+  },
+  {
+    id: 14,
+    name: "Cinnamon",
+    apiParam: "cinnamon",
+    isSelected: false,
+  },
+  {
+    id: 15,
+    name: "Chia",
+    apiParam: "chia",
+    isSelected: false,
+  },
+  {
+    id: 16,
+    name: "Maple Syrup",
+    apiParam: "maple+syrup",
+    isSelected: false,
+  },
+  {
+    id: 17,
+    name: "Pecans",
+    apiParam: "pecans",
+    isSelected: false,
+  },
 ];

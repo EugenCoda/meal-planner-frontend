@@ -81,7 +81,7 @@ const Home = () => {
         <Grid item container>
           <Grid item xs={1}>
             {" "}
-            Recipes to choose from
+            {/* Recipes to choose from */}
           </Grid>
           <Grid item container xs={11}>
             {dates.weekDays.map((day) => {

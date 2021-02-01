@@ -13,6 +13,10 @@ const AddItem = () => {
   // Items from Global Context
   const { addShoppingItem } = useContext(GlobalContext);
 
+  const FocusTextField = ({ innerRef, ...props }) => (
+    <TextField ref={innerRef} {...props} />
+  );
+
   return (
     <>
       <Formik
@@ -55,7 +59,9 @@ const AddItem = () => {
             <Grid container spacing={1}>
               <Grid item style={{ padding: "20px 5px" }}>
                 <Field
-                  component={TextField}
+                  // TODO : autofocus after submitting an item (innerref)
+                  autoFocus
+                  component={FocusTextField}
                   name="name"
                   type="text"
                   label="Add Item"

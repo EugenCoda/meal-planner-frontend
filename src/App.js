@@ -18,7 +18,7 @@ function App() {
           <Header />
         </Grid>
         <Grid item container>
-          <Grid item>
+          <Grid item xs={12}>
             <Switch>
               <Route exact from="/" render={(props) => <Home {...props} />} />
               <Route

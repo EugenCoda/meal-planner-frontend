@@ -70,29 +70,6 @@ export const AppReducer = (state, action) => {
         }),
       };
 
-    case "EDIT_DAILY_PLAN":
-      return {
-        ...state,
-        loading: false,
-        weeklyPlan: state.weeklyPlan.map((item) => {
-          if (action.payload.dailyPlan.id === item.id) {
-            if (action.payload.mealType === "Breakfast") {
-              delete item.breakfast;
-            }
-            if (action.payload.mealType === "Lunch") {
-              delete item.lunch;
-            }
-            if (action.payload.mealType === "Dinner") {
-              delete item.dinner;
-            }
-            if (action.payload.mealType === "Snack") {
-              delete item.snack;
-            }
-          }
-          return { ...item };
-        }),
-      };
-
     case "ADD_FAVORITES":
       return {
         ...state,
