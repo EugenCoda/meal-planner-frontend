@@ -9,16 +9,21 @@ const useStyles = makeStyles({
     paddingLeft: "20px",
   },
   dayTitle: {
-    textAlign: "center",
+    paddingRight: "50px",
+    paddingLeft: "50px",
   },
 });
 
-const DailyPlan = ({ day, currentWeek, currentYear }) => {
+const DailyPlan = ({ day, today, currentWeek, currentYear }) => {
   const classes = useStyles();
 
   return (
     <>
-      <Typography variant="overline" className={classes.dayTitle}>
+      <Typography
+        variant="overline"
+        className={classes.dayTitle}
+        style={day.date === today ? { color: "red" } : null}
+      >
         {day.date}
       </Typography>
       <Paper elevation={3} className={classes.root}>
@@ -48,12 +53,12 @@ const DailyPlan = ({ day, currentWeek, currentYear }) => {
             currentYear={currentYear}
           />
 
-          <Grid item container direction="column">
+          {/* <Grid item container direction="column">
             <Typography variant="caption">Calories: 2.100</Typography>
             <Typography variant="caption">Fat:75g</Typography>
             <Typography variant="caption">Protein: 120g</Typography>
             <Typography variant="caption">Carbs: 143g</Typography>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Paper>
     </>

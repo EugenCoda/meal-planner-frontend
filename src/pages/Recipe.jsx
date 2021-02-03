@@ -10,8 +10,28 @@ const useStyles = makeStyles({
     marginLeft: "auto",
     marginRight: "auto",
   },
-  ingredientImage: {
-    maxWidth: 100,
+  recipeIngredientImageWrapper: {
+    width: "110px",
+    height: "105px",
+    verticalAlign: "middle",
+    textAlign: "center",
+    lineHeight: "100px",
+    backgroundColor: "#fff",
+    position: "relative",
+  },
+  recipeIngredientImage: {
+    maxWidth: "100px",
+    maxHeight: "69px",
+    verticalAlign: "middle",
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    margin: "auto",
+  },
+  recipeDetails: {
+    padding: 20,
   },
 });
 
@@ -22,7 +42,7 @@ const Recipe = (props) => {
   const classes = useStyles();
 
   // Items from Global Context
-  const { recipes } = useContext(GlobalContext);
+  const { recipes, ingredients } = useContext(GlobalContext);
   const {
     recipeName,
     recipePublisher,
@@ -31,12 +51,12 @@ const Recipe = (props) => {
     imgURL,
     totalTime,
     servings,
-    ingredients,
+    ingredients: recipeIngredients,
     directions,
   } = recipes[recipeID - 1];
 
   return (
-    <Grid item container spacing={3}>
+    <Grid item container>
       <Grid item xs={12} sm={5} md={4}>
         <img src={imgURL} alt={recipeName} className={classes.recipeImage} />
       </Grid>
@@ -47,10 +67,9 @@ const Recipe = (props) => {
         sm={7}
         md={8}
         direction="column"
-        spacing={5}
         className={classes.recipeDetails}
       >
-        <Grid item>
+        <Grid item style={{ padding: "0 0 20px 0" }}>
           <Typography variant="h6" color="initial" gutterBottom>
             {recipeName}
           </Typography>
@@ -69,42 +88,71 @@ const Recipe = (props) => {
             Ingredients
           </Typography>
         </Grid>
-        {ingredients ? (
+        {recipeIngredients ? (
           <Grid item container spacing={2}>
-            {ingredients.map((ingredient) => {
+            {recipeIngredients.map((recipeIngredient) => {
+              // Search ingredient in the database after recipe ingredient ID
+              const dbIngredient = ingredients.filter(
+                (ingredient) => ingredient.id === recipeIngredient.id
+              );
               return (
-                <Grid item key={ingredient.id}>
-                  <img
-                    alt={ingredient.name}
-                    src={ingredient.img}
-                    className={classes.ingredientImage}
-                  />
-                  {ingredient.originalName}
+                <Grid
+                  container
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  item
+                  direction="column"
+                  alignItems="center"
+                  justify="flex-start"
+                  key={recipeIngredient.id}
+                >
+                  <Grid item>
+                    <div className={classes.recipeIngredientImageWrapper}>
+                      <img
+                        alt={dbIngredient[0].name}
+                        src={dbIngredient[0].img}
+                        className={classes.recipeIngredientImage}
+                      />
+                    </div>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="body2" color="initial" gutterBottom>
+                      {recipeIngredient.originalName.toLowerCase()}
+                    </Typography>
+                  </Grid>
                 </Grid>
               );
             })}
           </Grid>
         ) : null}
-        <Grid item>
+        <Grid item style={{ padding: "20px 0" }}>
           <Typography variant="h6" color="initial" gutterBottom>
             Directions
           </Typography>
+
+          {directions ? (
+            <Grid item container spacing={2}>
+              {directions.map((direction) => {
+                return (
+                  <Grid item key={direction.step}>
+                    <Typography variant="button">
+                      {`Step ${direction.step}: `}
+                    </Typography>
+                    {direction.description}
+                  </Grid>
+                );
+              })}
+            </Grid>
+          ) : null}
         </Grid>
-        {directions ? (
-          <Grid item container spacing={2}>
-            {directions.map((direction) => {
-              return (
-                <Grid item key={direction.step}>
-                  <Typography variant="button">
-                    {`Step ${direction.step}: `}
-                  </Typography>
-                  {direction.description}
-                </Grid>
-              );
-            })}
-          </Grid>
-        ) : null}
-        <Grid item container justify="flex-start" spacing={1}>
+        <Grid
+          item
+          container
+          justify="flex-start"
+          spacing={1}
+          style={{ padding: "20px 0" }}
+        >
           <Grid item>
             <Button variant="contained" onClick={() => history.push("/")}>
               Home

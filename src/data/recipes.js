@@ -17,51 +17,35 @@ export default [
     ingredients: [
       {
         id: 10,
-        name: "Rolled Oats",
         originalName: "4 cups gluten-free rolled oats",
-        img: "/images/ingredients/rolled-oats.jpg",
       },
       {
         id: 11,
-        name: "Peach",
         originalName: "4 large peaches, cut into chunks",
-        img: "/images/ingredients/peach.png",
       },
       {
         id: 12,
-        name: "Cashew Milk",
         originalName: "6 cups unsweetened cashew milk",
-        img: "/images/ingredients/cashews.jpg",
       },
       {
         id: 13,
-        name: "Coconut Cream",
         originalName: "1 cup coconut cream",
-        img: "/images/ingredients/coconut-cream.jpg",
       },
       {
         id: 14,
-        name: "Cinnamon",
         originalName: "3 tsp cinnamon powder",
-        img: "/images/ingredients/cinnamon.jpg",
       },
       {
         id: 15,
-        name: "Chia",
         originalName: "1/3 cup chia seeds",
-        img: "/images/ingredients/chia-seeds.jpg",
       },
       {
         id: 16,
-        name: "Maple Syrup",
         originalName: "1/3 cup maple syrup",
-        img: "/images/ingredients/maple-syrup-or-agave-nectar.jpg",
       },
       {
         id: 17,
-        name: "Pecans",
         originalName: "1/2 cup pecans, chopped",
-        img: "/images/ingredients/pecans.jpg",
       },
     ],
     directions: [
@@ -92,6 +76,57 @@ export default [
     totalTime: 30,
     diets: [],
     intolerances: [],
+    ingredients: [
+      {
+        id: 19,
+        originalName: "2 VINE-RIPENED TOMATOES, THICKLY SLICED",
+      },
+      {
+        id: 5,
+        originalName: "OLIVE OIL, FOR BRUSHING ",
+      },
+      {
+        id: 25,
+        originalName: "4 BURGER BUNS, HALVED",
+      },
+      {
+        id: 26,
+        originalName: "1 EGGPLANT (AUBERGINE), THINLY SLICED ",
+      },
+      {
+        id: 27,
+        originalName: "250G HALOUMI, SLICED",
+      },
+      {
+        id: 28,
+        originalName: "HARISSA MAYONNAISE ",
+      },
+      {
+        id: 29,
+        originalName: "CARAMELISED RED ONIONS, TO SERVE",
+      },
+      {
+        id: 30,
+        originalName: "ROCKET (ARUGULA) LEAVES, TO SERVE",
+      },
+    ],
+    directions: [
+      {
+        step: 1,
+        description:
+          "Preheat oven to 180°C (355°F). Place the tomato on a baking tray and brush with oil. Roast for 20 minutes or until cooked. Set aside. ",
+      },
+      {
+        step: 2,
+        description:
+          "Brush the bun halves with oil and place on a baking tray. Grill (broil) under a preheated hot grill for 1 minute or until golden. Set aside. Heat a char-grill pan or barbecue over high heat. Brush the eggplant with oil and char-grill or barbecue for 2 minutes each side or until cooked through. Set aside. ",
+      },
+      {
+        step: 3,
+        description:
+          "Brush the haloumi with oil and char-grill or barbecue for 1 minute each side or until golden. Spread the bun halves with harissa mayonnaise and top with the tomato, eggplant, haloumi, caramelised onions and rocket leaves to serve.",
+      },
+    ],
     isFavorite: false,
   },
   {
@@ -108,6 +143,61 @@ export default [
     totalTime: 20,
     diets: [],
     intolerances: [],
+    ingredients: [
+      {
+        id: 18,
+        originalName:
+          "2 tbsp. roughly chopped fresh parsley, plus more for garnish",
+      },
+      {
+        id: 19,
+        originalName: '2 medium vine-ripened tomatoes, cut into 1 1/2" pieces',
+      },
+      {
+        id: 20,
+        originalName:
+          '1 small cucumber, peeled, halved lengthwise, and sliced crosswise into 1/4" pieces',
+      },
+      {
+        id: 4,
+        originalName: "1⁄2 medium white onion, thinly sliced",
+      },
+      {
+        id: 5,
+        originalName: "3 tbsp. extra-virgin olive oil",
+      },
+      {
+        id: 21,
+        originalName: "1 tbsp. red wine vinegar",
+      },
+      {
+        id: 22,
+        originalName: "1⁄8 tsp. dried oregano, plus more",
+      },
+      {
+        id: 6,
+        originalName: "Kosher salt, to taste",
+      },
+      {
+        id: 7,
+        originalName: "Freshly ground black pepper, to taste",
+      },
+      {
+        id: 23,
+        originalName: "6 oz. feta, cut into thick slabs",
+      },
+      {
+        id: 24,
+        originalName: "8 kalamata olives",
+      },
+    ],
+    directions: [
+      {
+        step: 1,
+        description:
+          "Combine parsley, tomatoes, cucumbers, and onions in a bowl. In a small bowl, whisk together oil, vinegar, and oregano; season with salt and pepper and pour over cucumber mixture. Toss. Transfer salad to a serving bowl and top with feta and olives. Garnish with more oregano; season with pepper.",
+      },
+    ],
     isFavorite: false,
   },
   {
@@ -125,6 +215,32 @@ export default [
     totalTime: 5,
     diets: [],
     intolerances: [],
+    ingredients: [
+      {
+        id: 32,
+        originalName:
+          "1 slice crusty whole-wheat bread, cut into bite-size pieces",
+      },
+      {
+        id: 31,
+        originalName: "10 cherry tomatoes",
+      },
+      {
+        id: 33,
+        originalName: "¼ ounce sliced aged cheese",
+      },
+      {
+        id: 36,
+        originalName: "6 oil-cured olives",
+      },
+    ],
+    directions: [
+      {
+        step: 1,
+        description:
+          "Combine bread pieces, tomatoes, cheese and olives in a portable container.",
+      },
+    ],
     isFavorite: false,
   },
 ];

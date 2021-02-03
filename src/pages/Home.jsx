@@ -6,8 +6,9 @@ import moment from "moment";
 
 const Home = () => {
   let dates = {
-    today: moment().format("LL").toString(),
+    today: moment().format("ddd DD").toString(),
     currentWeek: moment().isoWeek().toString(),
+    currentMonth: moment().month("MMM").toString(),
     currentYear: moment().year().toString(),
     weekDays: [
       {
@@ -75,6 +76,7 @@ const Home = () => {
           <CurrentWeek
             today={dates.today}
             currentWeek={dates.currentWeek}
+            currentMonth={dates.currentMonth}
             currentYear={dates.currentYear}
           />
         </Grid>
@@ -89,6 +91,7 @@ const Home = () => {
                 <Grid key={day.id} item>
                   <DailyPlan
                     day={day}
+                    today={dates.today}
                     currentWeek={dates.currentWeek}
                     currentYear={dates.currentYear}
                   />

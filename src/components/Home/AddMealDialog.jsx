@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../context/GlobalState";
+import { Link, useHistory } from "react-router-dom";
 import {
   Button,
   Typography,
@@ -31,6 +32,7 @@ function Alert(props) {
 }
 
 const AddMealDialog = ({ mealType, selectedDate, open, setOpen }) => {
+  let history = useHistory();
   const classes = useStyles();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -138,21 +140,35 @@ const AddMealDialog = ({ mealType, selectedDate, open, setOpen }) => {
                 <Typography className={classes.heading}>Breakfast</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                {favoriteBreakfastRecipes.map((recipe) => (
-                  <Button
-                    key={recipe.id}
-                    style={
-                      selectedRecipe.id === recipe.id
-                        ? { backgroundColor: "green" }
-                        : null
-                    }
-                    onClick={() => {
-                      handleRecipeButtonClick(recipe);
-                    }}
-                  >
-                    {recipe.recipeName}
-                  </Button>
-                ))}
+                {favoriteBreakfastRecipes.length !== 0 ? (
+                  favoriteBreakfastRecipes.map((recipe) => (
+                    <Button
+                      key={recipe.id}
+                      style={
+                        selectedRecipe.id === recipe.id
+                          ? { backgroundColor: "green" }
+                          : null
+                      }
+                      onClick={() => {
+                        handleRecipeButtonClick(recipe);
+                      }}
+                    >
+                      {recipe.recipeName}
+                    </Button>
+                  ))
+                ) : (
+                  <Typography>
+                    No recipes found in your favorites. Click
+                    <Link
+                      variant="string"
+                      onClick={() => history.push("/search")}
+                      style={{ paddingRight: 5, paddingLeft: 5 }}
+                    >
+                      here
+                    </Link>
+                    to search for new recipes.
+                  </Typography>
+                )}
               </AccordionDetails>
             </Accordion>
             <Accordion
@@ -167,21 +183,35 @@ const AddMealDialog = ({ mealType, selectedDate, open, setOpen }) => {
                 <Typography className={classes.heading}>Lunch</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                {favoriteLunchRecipes.map((recipe) => (
-                  <Button
-                    key={recipe.id}
-                    style={
-                      selectedRecipe.id === recipe.id
-                        ? { backgroundColor: "green" }
-                        : null
-                    }
-                    onClick={() => {
-                      handleRecipeButtonClick(recipe);
-                    }}
-                  >
-                    {recipe.recipeName}
-                  </Button>
-                ))}
+                {favoriteLunchRecipes.length !== 0 ? (
+                  favoriteLunchRecipes.map((recipe) => (
+                    <Button
+                      key={recipe.id}
+                      style={
+                        selectedRecipe.id === recipe.id
+                          ? { backgroundColor: "green" }
+                          : null
+                      }
+                      onClick={() => {
+                        handleRecipeButtonClick(recipe);
+                      }}
+                    >
+                      {recipe.recipeName}
+                    </Button>
+                  ))
+                ) : (
+                  <Typography>
+                    No recipes found in your favorites. Click
+                    <Link
+                      variant="string"
+                      onClick={() => history.push("/search")}
+                      style={{ paddingRight: 5, paddingLeft: 5 }}
+                    >
+                      here
+                    </Link>
+                    to search for new recipes.
+                  </Typography>
+                )}
               </AccordionDetails>
             </Accordion>
             <Accordion
@@ -196,21 +226,35 @@ const AddMealDialog = ({ mealType, selectedDate, open, setOpen }) => {
                 <Typography className={classes.heading}>Dinner</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                {favoriteDinnerRecipes.map((recipe) => (
-                  <Button
-                    key={recipe.id}
-                    style={
-                      selectedRecipe.id === recipe.id
-                        ? { backgroundColor: "green" }
-                        : null
-                    }
-                    onClick={() => {
-                      handleRecipeButtonClick(recipe);
-                    }}
-                  >
-                    {recipe.recipeName}
-                  </Button>
-                ))}
+                {favoriteDinnerRecipes.length !== 0 ? (
+                  favoriteDinnerRecipes.map((recipe) => (
+                    <Button
+                      key={recipe.id}
+                      style={
+                        selectedRecipe.id === recipe.id
+                          ? { backgroundColor: "green" }
+                          : null
+                      }
+                      onClick={() => {
+                        handleRecipeButtonClick(recipe);
+                      }}
+                    >
+                      {recipe.recipeName}
+                    </Button>
+                  ))
+                ) : (
+                  <Typography>
+                    No recipes found in your favorites. Click
+                    <Link
+                      variant="string"
+                      onClick={() => history.push("/search")}
+                      style={{ paddingRight: 5, paddingLeft: 5 }}
+                    >
+                      here
+                    </Link>
+                    to search for new recipes.
+                  </Typography>
+                )}
               </AccordionDetails>
             </Accordion>
             <Accordion
@@ -225,21 +269,35 @@ const AddMealDialog = ({ mealType, selectedDate, open, setOpen }) => {
                 <Typography className={classes.heading}>Snack</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                {favoriteSnackRecipes.map((recipe) => (
-                  <Button
-                    key={recipe.id}
-                    style={
-                      selectedRecipe.id === recipe.id
-                        ? { backgroundColor: "green" }
-                        : null
-                    }
-                    onClick={() => {
-                      handleRecipeButtonClick(recipe);
-                    }}
-                  >
-                    {recipe.recipeName}
-                  </Button>
-                ))}
+                {favoriteSnackRecipes.length !== 0 ? (
+                  favoriteSnackRecipes.map((recipe) => (
+                    <Button
+                      key={recipe.id}
+                      style={
+                        selectedRecipe.id === recipe.id
+                          ? { backgroundColor: "green" }
+                          : null
+                      }
+                      onClick={() => {
+                        handleRecipeButtonClick(recipe);
+                      }}
+                    >
+                      {recipe.recipeName}
+                    </Button>
+                  ))
+                ) : (
+                  <Typography>
+                    No recipes found in your favorites. Click
+                    <Link
+                      variant="string"
+                      onClick={() => history.push("/search")}
+                      style={{ paddingRight: 5, paddingLeft: 5 }}
+                    >
+                      here
+                    </Link>
+                    to search for new recipes.
+                  </Typography>
+                )}
               </AccordionDetails>
             </Accordion>
           </DialogContentText>
