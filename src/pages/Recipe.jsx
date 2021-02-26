@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 import { Button, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { getNutritionStats } from "../utils/getNutritionStats";
 
 const useStyles = makeStyles({
   recipeImage: {
@@ -81,6 +82,10 @@ const Recipe = (props) => {
           </Typography>
           <Typography variant="subtitle2" gutterBottom>
             Servings: {servings}
+          </Typography>
+          <Typography variant="subtitle2" gutterBottom>
+            Nutritional Values (per 100g):{" "}
+            {getNutritionStats(recipeIngredients, ingredients, servings)}
           </Typography>
         </Grid>
         <Grid item>

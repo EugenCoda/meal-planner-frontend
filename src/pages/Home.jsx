@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import CurrentWeek from "../components/Home/CurrentWeek";
+// import CurrentWeek from "../components/Home/CurrentWeek";
 import DailyPlan from "../components/Home/DailyPlan";
 import moment from "moment";
 
@@ -72,14 +72,14 @@ const Home = () => {
   return (
     <>
       <Grid container direction="column">
-        <Grid item style={{ paddingBottom: 20 }}>
+        {/* <Grid item style={{ paddingBottom: 20 }}>
           <CurrentWeek
             today={dates.today}
             currentWeek={dates.currentWeek}
             currentMonth={dates.currentMonth}
             currentYear={dates.currentYear}
           />
-        </Grid>
+        </Grid> */}
         <Grid item container>
           <Grid item xs={1}>
             {" "}
