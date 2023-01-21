@@ -9,7 +9,7 @@ import {
   Typography,
   // useMediaQuery,
 } from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Tooltip, IconButton } from "@material-ui/core";
