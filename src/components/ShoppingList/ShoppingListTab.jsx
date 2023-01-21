@@ -23,7 +23,6 @@ const ShoppingListTab = ({
 
   // Remove All Completed Shopping Items
   const handleRemoveAllCompletedItems = () => {
-    console.log("removing all items...");
     removeAllCompletedShoppingItems();
   };
 

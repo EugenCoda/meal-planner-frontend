@@ -156,62 +156,48 @@ const ShoppingListBox = () => {
           label={`All Items (${shoppingItemsUncompleteFull.length})`}
           {...a11yProps(0)}
         />
-        {shoppingItemsUncompleteFruitsVegetables.length && (
-          <Tab
-            className={classes.tab}
-            label={`Fruits & Vegetables (${shoppingItemsUncompleteFruitsVegetables.length})`}
-            {...a11yProps(1)}
-          />
-        )}
-        {shoppingItemsUncompleteBakery.length && (
-          <Tab
-            className={classes.tab}
-            label={`Bakery (${shoppingItemsUncompleteBakery.length})`}
-            {...a11yProps(2)}
-          />
-        )}
-        {shoppingItemsUncompleteMeatSeafood.length && (
-          <Tab
-            className={classes.tab}
-            label={`Meat & Seafood (${shoppingItemsUncompleteMeatSeafood.length})`}
-            {...a11yProps(3)}
-          />
-        )}
-        {shoppingItemsUncompleteDairyCheeseEggs.length && (
-          <Tab
-            className={classes.tab}
-            label={`Dairy, Cheese & Eggs (${shoppingItemsUncompleteDairyCheeseEggs.length})`}
-            {...a11yProps(4)}
-          />
-        )}
-        {shoppingItemsUncompleteRiceGrainsBeans.length && (
-          <Tab
-            className={classes.tab}
-            label={`Rice, Grains & Beans (${shoppingItemsUncompleteRiceGrainsBeans.length})`}
-            {...a11yProps(5)}
-          />
-        )}
-        {shoppingItemsUncompleteOilsSpices.length && (
-          <Tab
-            className={classes.tab}
-            label={`Oils, Spices etc. (${shoppingItemsUncompleteOilsSpices.length})`}
-            {...a11yProps(6)}
-          />
-        )}
-        {shoppingItemsUncompleteDrinks.length && (
-          <Tab
-            className={classes.tab}
-            label={`Drinks (${shoppingItemsUncompleteDrinks.length})`}
-            {...a11yProps(7)}
-          />
-        )}
-        {shoppingItemsUncompleteOther.length && (
-          <Tab
-            className={classes.tab}
-            label={`Other (${shoppingItemsUncompleteOther.length})`}
-            {...a11yProps(8)}
-          />
-        )}
+
+        <Tab
+          className={classes.tab}
+          label={`Fruits & Vegetables (${shoppingItemsUncompleteFruitsVegetables.length})`}
+          {...a11yProps(1)}
+        />
+        <Tab
+          className={classes.tab}
+          label={`Bakery (${shoppingItemsUncompleteBakery.length})`}
+          {...a11yProps(2)}
+        />
+        <Tab
+          className={classes.tab}
+          label={`Meat & Seafood (${shoppingItemsUncompleteMeatSeafood.length})`}
+          {...a11yProps(3)}
+        />
+        <Tab
+          className={classes.tab}
+          label={`Dairy, Cheese & Eggs (${shoppingItemsUncompleteDairyCheeseEggs.length})`}
+          {...a11yProps(4)}
+        />
+        <Tab
+          className={classes.tab}
+          label={`Rice, Grains & Beans (${shoppingItemsUncompleteRiceGrainsBeans.length})`}
+          {...a11yProps(5)}
+        />
+
+        <Tab
+          className={classes.tab}
+          label={`Oils, Spices etc. (${shoppingItemsUncompleteOilsSpices.length})`}
+          {...a11yProps(6)}
+        />
+        <Tab
+          className={classes.tab}
+          label={`Drinks (${shoppingItemsUncompleteDrinks.length})`}
+          {...a11yProps(7)}
+        />
+        <Tab
+          className={classes.tab}
+          label={`Other (${shoppingItemsUncompleteOther.length})`}
+          {...a11yProps(8)}
+        />
       </Tabs>
       <TabPanel value={value} index={0}>
         <ShoppingListTab
