@@ -6,12 +6,14 @@ export const AppReducer = (state, action) => {
         loading: false,
         recipes: action.payload,
       };
+
     case "CREATE_DAILY_PLAN":
       return {
         ...state,
         loading: false,
         weeklyPlan: [...state.weeklyPlan, { id: action.payload }],
       };
+
     case "ADD_TO_DAILY_PLAN":
       return {
         ...state,
@@ -84,6 +86,7 @@ export const AppReducer = (state, action) => {
           return { ...recipe };
         }),
       };
+
     case "SELECT_DIET":
       return {
         ...state,
@@ -98,6 +101,7 @@ export const AppReducer = (state, action) => {
           return { ...diet };
         }),
       };
+
     case "SELECT_INGREDIENT":
       return {
         ...state,
@@ -112,6 +116,7 @@ export const AppReducer = (state, action) => {
           return { ...ingredient };
         }),
       };
+
     case "SELECT_ALLERGY":
       return {
         ...state,
@@ -126,12 +131,14 @@ export const AppReducer = (state, action) => {
           return { ...allergy };
         }),
       };
+
     case "ADD_SHOPPING_ITEM":
       return {
         ...state,
         loading: false,
         shoppingList: [...state.shoppingList, action.payload],
       };
+
     case "MARK_SHOPPING_ITEM_COMPLETED":
       return {
         ...state,
@@ -146,17 +153,38 @@ export const AppReducer = (state, action) => {
           return { ...item };
         }),
       };
+
+    case "REMOVE_COMPLETED_SHOPPING_ITEM":
+      return {
+        ...state,
+        loading: false,
+        shoppingList: state.shoppingList.filter((item) => {
+          return item.id !== action.payload;
+        }),
+      };
+
+    case "REMOVE_ALL_COMPLETED_SHOPPING_ITEMS":
+      return {
+        ...state,
+        loading: false,
+        shoppingList: state.shoppingList.filter((item) => {
+          return !item.isCompleted;
+        }),
+      };
+
     case "SET_SEARCH_FILTER":
       return {
         ...state,
         loading: false,
         searchFilter: action.payload,
       };
+
     case "ERROR":
       return {
         ...state,
         error: action.payload,
       };
+
     default:
       return state;
   }

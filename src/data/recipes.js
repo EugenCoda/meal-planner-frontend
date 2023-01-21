@@ -296,7 +296,7 @@ export default [
     recipePublisher: "Saveur",
     recipeURL: "https://www.saveur.com/article/Recipes/Greek-Salad-Horiatiki/",
     imgURL:
-      "https://www.saveur.com/resizer/B_Ul_DPB09c0Xdz-tbHYQ0ZTtFU=/400x600/arc-anglerfish-arc2-prod-bonnier.s3.amazonaws.com/public/PFWVJL672VPBJNPJ4G7CYAT5MA.jpg",
+      "https://www.saveur.com/app/uploads/2019/01/22/PFWVJL672VPBJNPJ4G7CYAT5MA.jpg?width=785",
     description:
       "This refreshing salad takes on various guises in Greece depending on what vegetables are in season, but it almost always features feta and a dusting of dried oregano.",
     servings: 2,

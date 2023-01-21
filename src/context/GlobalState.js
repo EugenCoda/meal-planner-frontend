@@ -100,6 +100,20 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  function removeCompletedShoppingItem(id) {
+    dispatch({
+      type: "REMOVE_COMPLETED_SHOPPING_ITEM",
+      payload: id,
+    });
+  }
+
+  function removeAllCompletedShoppingItems() {
+    dispatch({
+      type: "REMOVE_ALL_COMPLETED_SHOPPING_ITEMS",
+      payload: "test",
+    });
+  }
+
   function setSearchFilter(text) {
     dispatch({
       type: "SET_SEARCH_FILTER",
@@ -126,6 +140,8 @@ export const GlobalProvider = ({ children }) => {
         selectAllergy,
         addShoppingItem,
         markShoppingItemCompleted,
+        removeCompletedShoppingItem,
+        removeAllCompletedShoppingItems,
         setSearchFilter,
       }}
     >

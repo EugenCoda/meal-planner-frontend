@@ -5,13 +5,14 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
-  Button,
   Paper,
   Typography,
-  useMediaQuery,
+  // useMediaQuery,
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { Tooltip, IconButton } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -72,11 +73,16 @@ const useStyles = makeStyles((theme) => ({
 
 const ShoppingListItem = ({ shoppingItems, tag }) => {
   const classes = useStyles();
-  const theme = useTheme();
-  const isBigScreen = useMediaQuery(theme.breakpoints.up("md"));
+  // const theme = useTheme();
 
   // Items from Global Context
-  const { markShoppingItemCompleted } = useContext(GlobalContext);
+  const { markShoppingItemCompleted, removeCompletedShoppingItem } =
+    useContext(GlobalContext);
+
+  // Remove Completed Shopping Item
+  const handleRemoveItem = (id) => {
+    removeCompletedShoppingItem(id);
+  };
 
   return (
     <>
@@ -113,12 +119,17 @@ const ShoppingListItem = ({ shoppingItems, tag }) => {
             <Typography className={classes.lineItemText}>
               {" - " + item.quantity + " " + item.sizeOrUnit}
             </Typography>
-
-            {isBigScreen && tag && item.category ? (
-              <Button color="primary" size="small">
-                {item.category}
-              </Button>
-            ) : null}
+            {item.isCompleted && (
+              <Tooltip
+                title="Remove From Shopping List"
+                aria-label="shopping item"
+                placement="top"
+              >
+                <IconButton onClick={() => handleRemoveItem(item.id)}>
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
+            )}
           </Paper>
         ))}
       </FormGroup>

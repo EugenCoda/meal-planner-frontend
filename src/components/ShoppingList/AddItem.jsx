@@ -59,7 +59,6 @@ const AddItem = () => {
             <Grid container spacing={1}>
               <Grid item style={{ padding: "20px 5px" }}>
                 <Field
-                  // TODO : autofocus after submitting an item (innerref)
                   autoFocus
                   component={FocusTextField}
                   name="name"

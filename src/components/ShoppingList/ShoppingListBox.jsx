@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../context/GlobalState";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -65,13 +65,15 @@ const ShoppingListBox = () => {
     (item) => item.isCompleted
   );
   // Select uncompleted shopping items - Fruits & Vegetables
-  const shoppingItemsUncompleteFruitsVegetables = shoppingItemsUncompleteFull.filter(
-    (item) => item.category === "Fruits & Vegetables"
-  );
+  const shoppingItemsUncompleteFruitsVegetables =
+    shoppingItemsUncompleteFull.filter(
+      (item) => item.category === "Fruits & Vegetables"
+    );
   // Select completed shopping items - Fruits & Vegetables
-  const shoppingItemsCompletedFruitsVegetables = shoppingItemsCompletedFull.filter(
-    (item) => item.category === "Fruits & Vegetables"
-  );
+  const shoppingItemsCompletedFruitsVegetables =
+    shoppingItemsCompletedFull.filter(
+      (item) => item.category === "Fruits & Vegetables"
+    );
   // Select uncompleted shopping items - Bakery
   const shoppingItemsUncompleteBakery = shoppingItemsUncompleteFull.filter(
     (item) => item.category === "Bakery"
@@ -89,21 +91,25 @@ const ShoppingListBox = () => {
     (item) => item.category === "Meat & Seafood"
   );
   // Select uncompleted shopping items - Dairy, Cheese & Eggs
-  const shoppingItemsUncompleteDairyCheeseEggs = shoppingItemsUncompleteFull.filter(
-    (item) => item.category === "Dairy, Cheese & Eggs"
-  );
+  const shoppingItemsUncompleteDairyCheeseEggs =
+    shoppingItemsUncompleteFull.filter(
+      (item) => item.category === "Dairy, Cheese & Eggs"
+    );
   // Select completed shopping items - Dairy, Cheese & Eggs
-  const shoppingItemsCompletedDairyCheeseEggs = shoppingItemsCompletedFull.filter(
-    (item) => item.category === "Dairy, Cheese & Eggs"
-  );
+  const shoppingItemsCompletedDairyCheeseEggs =
+    shoppingItemsCompletedFull.filter(
+      (item) => item.category === "Dairy, Cheese & Eggs"
+    );
   // Select uncompleted shopping items - Rice, Grains & Beans
-  const shoppingItemsUncompleteRiceGrainsBeans = shoppingItemsUncompleteFull.filter(
-    (item) => item.category === "Rice, Grains & Beans"
-  );
+  const shoppingItemsUncompleteRiceGrainsBeans =
+    shoppingItemsUncompleteFull.filter(
+      (item) => item.category === "Rice, Grains & Beans"
+    );
   // Select completed shopping items - Rice, Grains & Beans
-  const shoppingItemsCompletedRiceGrainsBeans = shoppingItemsCompletedFull.filter(
-    (item) => item.category === "Rice, Grains & Beans"
-  );
+  const shoppingItemsCompletedRiceGrainsBeans =
+    shoppingItemsCompletedFull.filter(
+      (item) => item.category === "Rice, Grains & Beans"
+    );
   // Select uncompleted shopping items - Oils, Spices etc.
   const shoppingItemsUncompleteOilsSpices = shoppingItemsUncompleteFull.filter(
     (item) => item.category === "Oils, Spices etc."
@@ -129,7 +135,7 @@ const ShoppingListBox = () => {
     (item) => item.category === "Other" || item.category === ""
   );
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -147,49 +153,65 @@ const ShoppingListBox = () => {
       >
         <Tab
           className={classes.tab}
-          label={`Full List(${shoppingItemsUncompleteFull.length})`}
+          label={`All Items (${shoppingItemsUncompleteFull.length})`}
           {...a11yProps(0)}
         />
-        <Tab
-          className={classes.tab}
-          label={`Fruits & Vegetables(${shoppingItemsUncompleteFruitsVegetables.length})`}
-          {...a11yProps(1)}
-        />
-        <Tab
-          className={classes.tab}
-          label={`Bakery(${shoppingItemsUncompleteBakery.length})`}
-          {...a11yProps(2)}
-        />
-        <Tab
-          className={classes.tab}
-          label={`Meat & Seafood(${shoppingItemsUncompleteMeatSeafood.length})`}
-          {...a11yProps(3)}
-        />
-        <Tab
-          className={classes.tab}
-          label={`Dairy, Cheese & Eggs(${shoppingItemsUncompleteDairyCheeseEggs.length})`}
-          {...a11yProps(4)}
-        />
-        <Tab
-          className={classes.tab}
-          label={`Rice, Grains & Beans(${shoppingItemsUncompleteRiceGrainsBeans.length})`}
-          {...a11yProps(5)}
-        />
-        <Tab
-          className={classes.tab}
-          label={`Oils, Spices etc.(${shoppingItemsUncompleteOilsSpices.length})`}
-          {...a11yProps(6)}
-        />
-        <Tab
-          className={classes.tab}
-          label={`Drinks(${shoppingItemsUncompleteDrinks.length})`}
-          {...a11yProps(7)}
-        />
-        <Tab
-          className={classes.tab}
-          label={`Other(${shoppingItemsUncompleteOther.length})`}
-          {...a11yProps(8)}
-        />
+        {shoppingItemsUncompleteFruitsVegetables.length && (
+          <Tab
+            className={classes.tab}
+            label={`Fruits & Vegetables (${shoppingItemsUncompleteFruitsVegetables.length})`}
+            {...a11yProps(1)}
+          />
+        )}
+        {shoppingItemsUncompleteBakery.length && (
+          <Tab
+            className={classes.tab}
+            label={`Bakery (${shoppingItemsUncompleteBakery.length})`}
+            {...a11yProps(2)}
+          />
+        )}
+        {shoppingItemsUncompleteMeatSeafood.length && (
+          <Tab
+            className={classes.tab}
+            label={`Meat & Seafood (${shoppingItemsUncompleteMeatSeafood.length})`}
+            {...a11yProps(3)}
+          />
+        )}
+        {shoppingItemsUncompleteDairyCheeseEggs.length && (
+          <Tab
+            className={classes.tab}
+            label={`Dairy, Cheese & Eggs (${shoppingItemsUncompleteDairyCheeseEggs.length})`}
+            {...a11yProps(4)}
+          />
+        )}
+        {shoppingItemsUncompleteRiceGrainsBeans.length && (
+          <Tab
+            className={classes.tab}
+            label={`Rice, Grains & Beans (${shoppingItemsUncompleteRiceGrainsBeans.length})`}
+            {...a11yProps(5)}
+          />
+        )}
+        {shoppingItemsUncompleteOilsSpices.length && (
+          <Tab
+            className={classes.tab}
+            label={`Oils, Spices etc. (${shoppingItemsUncompleteOilsSpices.length})`}
+            {...a11yProps(6)}
+          />
+        )}
+        {shoppingItemsUncompleteDrinks.length && (
+          <Tab
+            className={classes.tab}
+            label={`Drinks (${shoppingItemsUncompleteDrinks.length})`}
+            {...a11yProps(7)}
+          />
+        )}
+        {shoppingItemsUncompleteOther.length && (
+          <Tab
+            className={classes.tab}
+            label={`Other (${shoppingItemsUncompleteOther.length})`}
+            {...a11yProps(8)}
+          />
+        )}
       </Tabs>
       <TabPanel value={value} index={0}>
         <ShoppingListTab

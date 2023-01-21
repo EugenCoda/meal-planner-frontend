@@ -17,6 +17,10 @@ export default [
     label: "gram",
   },
   {
+    value: "kg",
+    label: "kg",
+  },
+  {
     value: "liter",
     label: "liter",
   },
