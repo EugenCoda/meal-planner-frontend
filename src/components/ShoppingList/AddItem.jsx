@@ -127,7 +127,7 @@ const AddItem = () => {
                   disabled={isSubmitting}
                   onClick={submitForm}
                 >
-                  Done
+                  Add
                 </Button>
               </Grid>
             </Grid>
