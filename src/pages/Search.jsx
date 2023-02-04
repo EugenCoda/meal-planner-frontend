@@ -1,13 +1,10 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
 import { Box, Grid } from "@material-ui/core";
 import SearchBox from "../components/Search/SearchBox";
 import { getRecipeCard } from "../utils/getRecipeCard";
 
 const Search = () => {
-  let history = useHistory();
-
   // Items from Global Context
   const { recipes, searchFilter } = useContext(GlobalContext);
 
@@ -30,7 +27,7 @@ const Search = () => {
                   recipe.recipeName
                     .toLowerCase()
                     .includes(searchFilter.toLowerCase()) &&
-                  getRecipeCard(recipe, history)
+                  getRecipeCard(recipe)
                 );
               })}
             </Grid>

@@ -12,8 +12,7 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import { withRouter } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Header = () => {
-  let history = useHistory();
+  let navigate = useNavigate();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -51,12 +50,12 @@ const Header = () => {
   };
 
   const handleMenuClick = (pageURL) => {
-    history.push(pageURL);
+    navigate(pageURL);
     setAnchorEl(null);
   };
 
   const handleButtonClick = (pageURL) => {
-    history.push(pageURL);
+    navigate(pageURL);
   };
 
   const menuItems = [
@@ -162,4 +161,4 @@ const Header = () => {
   );
 };
 
-export default withRouter(Header);
+export default Header;

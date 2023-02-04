@@ -7,7 +7,7 @@ import Favorites from "./pages/Favorites";
 import ShoppingList from "./pages/ShoppingList";
 import Settings from "./pages/Settings";
 import Recipe from "./pages/Recipe";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { GlobalProvider } from "./context/GlobalState";
 
 function App() {
@@ -19,34 +19,14 @@ function App() {
         </Grid>
         <Grid item container>
           <Grid item xs={12}>
-            <Switch>
-              <Route exact from="/" render={(props) => <Home {...props} />} />
-              <Route
-                exact
-                path="/search"
-                render={(props) => <Search {...props} />}
-              />
-              <Route
-                exact
-                path="/favorites"
-                render={(props) => <Favorites {...props} />}
-              />
-              <Route
-                exact
-                path="/shopping-list"
-                render={(props) => <ShoppingList {...props} />}
-              />
-              <Route
-                exact
-                path="/settings"
-                render={(props) => <Settings {...props} />}
-              />
-              <Route
-                exact
-                path="/recipe/:recipeID"
-                render={(props) => <Recipe {...props} />}
-              />
-            </Switch>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/shopping-list" element={<ShoppingList />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/recipe/:recipeID" element={<Recipe />} />
+            </Routes>
           </Grid>
         </Grid>
       </Grid>

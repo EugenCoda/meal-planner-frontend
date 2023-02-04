@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../context/GlobalState";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Tooltip,
   IconButton,
@@ -73,7 +73,7 @@ const MealCard = ({ mealType, dailyPlan, selectedDate }) => {
   const classes = useStyles();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  let history = useHistory();
+  let navigate = useNavigate();
 
   // Items from Global Context
   const { removeFromDailyPlan } = useContext(GlobalContext);
@@ -144,7 +144,7 @@ const MealCard = ({ mealType, dailyPlan, selectedDate }) => {
         <DialogContent>
           <DialogContentText>
             <Card className={classes.media}>
-              <CardActionArea onClick={() => history.push(`/recipe/${id}`)}>
+              <CardActionArea onClick={() => navigate(`/recipe/${id}`)}>
                 <CardMedia
                   className={classes.recipeModal}
                   component="img"

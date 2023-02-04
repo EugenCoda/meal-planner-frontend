@@ -3,6 +3,7 @@ import { GlobalContext } from "../context/GlobalState";
 import { Button, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { getNutritionStats } from "../utils/getNutritionStats";
+import { useNavigate, useParams } from "react-router-dom";
 
 const useStyles = makeStyles({
   recipeImage: {
@@ -37,9 +38,8 @@ const useStyles = makeStyles({
 });
 
 const Recipe = (props) => {
-  const { match, history } = props;
-  const { params } = match;
-  const { recipeID } = params;
+  let navigate = useNavigate();
+  let { recipeID } = useParams();
   const classes = useStyles();
 
   // Items from Global Context
@@ -109,7 +109,7 @@ const Recipe = (props) => {
                   item
                   direction="column"
                   alignItems="center"
-                  justify="flex-start"
+                  justifyContent="flex-start"
                   key={recipeIngredient.id}
                 >
                   <Grid item>
@@ -154,12 +154,12 @@ const Recipe = (props) => {
         <Grid
           item
           container
-          justify="flex-start"
+          justifyContent="flex-start"
           spacing={1}
           style={{ padding: "20px 0" }}
         >
           <Grid item>
-            <Button variant="contained" onClick={() => history.push("/")}>
+            <Button variant="contained" onClick={() => navigate("/")}>
               Home
             </Button>
           </Grid>

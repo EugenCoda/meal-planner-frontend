@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../context/GlobalState";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Button,
   Typography,
@@ -32,15 +32,13 @@ function Alert(props) {
 }
 
 const AddMealDialog = ({ mealType, selectedDate, open, setOpen }) => {
-  let history = useHistory();
   const classes = useStyles();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   // Items from Global Context
-  const { recipes, weeklyPlan, addToDailyPlan, createDailyPlan } = useContext(
-    GlobalContext
-  );
+  const { recipes, weeklyPlan, addToDailyPlan, createDailyPlan } =
+    useContext(GlobalContext);
 
   // Select all favorite recipes
   const favoriteRecipes = recipes.filter((recipe) => recipe.isFavorite);
@@ -160,8 +158,7 @@ const AddMealDialog = ({ mealType, selectedDate, open, setOpen }) => {
                   <Typography>
                     No recipes found in your favorites. Click
                     <Link
-                      variant="string"
-                      onClick={() => history.push("/search")}
+                      to="/search"
                       style={{ paddingRight: 5, paddingLeft: 5 }}
                     >
                       here
@@ -203,8 +200,7 @@ const AddMealDialog = ({ mealType, selectedDate, open, setOpen }) => {
                   <Typography>
                     No recipes found in your favorites. Click
                     <Link
-                      variant="string"
-                      onClick={() => history.push("/search")}
+                      to="/search"
                       style={{ paddingRight: 5, paddingLeft: 5 }}
                     >
                       here
@@ -246,8 +242,7 @@ const AddMealDialog = ({ mealType, selectedDate, open, setOpen }) => {
                   <Typography>
                     No recipes found in your favorites. Click
                     <Link
-                      variant="string"
-                      onClick={() => history.push("/search")}
+                      to="/search"
                       style={{ paddingRight: 5, paddingLeft: 5 }}
                     >
                       here
@@ -289,8 +284,7 @@ const AddMealDialog = ({ mealType, selectedDate, open, setOpen }) => {
                   <Typography>
                     No recipes found in your favorites. Click
                     <Link
-                      variant="string"
-                      onClick={() => history.push("/search")}
+                      to="/search"
                       style={{ paddingRight: 5, paddingLeft: 5 }}
                     >
                       here

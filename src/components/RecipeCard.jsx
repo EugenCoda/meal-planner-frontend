@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -7,7 +7,7 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  Link,
+  Link as MuiLink,
   Typography,
   CardMedia,
   IconButton,
@@ -37,14 +37,14 @@ const RecipeCard = ({
   isFavorite,
 }) => {
   const classes = useStyles();
-  let history = useHistory();
+  let navigate = useNavigate();
 
   // Items from Global Context
   const { addToFavorites } = useContext(GlobalContext);
 
   return (
     <Card className={classes.root}>
-      <CardActionArea onClick={() => history.push(`/recipe/${id}`)}>
+      <CardActionArea onClick={() => navigate(`/recipe/${id}`)}>
         <CardMedia
           className={classes.media}
           component="img"
@@ -60,9 +60,9 @@ const RecipeCard = ({
       </CardActionArea>
 
       <CardActions disableSpacing>
-        <Link href={recipeURL} target="_blank" color="inherit">
+        <MuiLink href={recipeURL} target="_blank" color="inherit">
           {recipePublisher}
-        </Link>
+        </MuiLink>
         <Tooltip
           title={isFavorite ? "Remove From Favorites" : "Add To Favorite"}
           aria-label="favorites"

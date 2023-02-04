@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalState";
 import SearchIcon from "@material-ui/icons/Search";
 import { Paper, Typography, Grid, Button, TextField } from "@material-ui/core";
-import { fade, makeStyles } from "@material-ui/core/styles";
+import { alpha, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   searchPaper: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: fade(theme.palette.common.white, 0.5),
+    backgroundColor: alpha(theme.palette.common.white, 0.5),
     paddingLeft: "20px",
     paddingRight: "20px",
     paddingBottom: "20px",
