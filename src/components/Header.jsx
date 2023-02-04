@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
   AppBar,
@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,21 +41,24 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
   let navigate = useNavigate();
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
+  const { logout } = useContext(AuthContext);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMenuClick = (pageURL) => {
+  const handleMenuClick = (menuTitle, pageURL) => {
+    menuTitle === "Logout" && logout();
     navigate(pageURL);
     setAnchorEl(null);
   };
 
-  const handleButtonClick = (pageURL) => {
+  const handleButtonClick = (menuTitle, pageURL) => {
+    menuTitle === "Logout" && logout();
     navigate(pageURL);
   };
 
@@ -78,6 +82,10 @@ const Header = () => {
     {
       menuTitle: "Settings",
       pageURL: "/settings",
+    },
+    {
+      menuTitle: "Logout",
+      pageURL: "/login",
     },
   ];
 
@@ -127,7 +135,7 @@ const Header = () => {
                   return (
                     <MenuItem
                       key={index}
-                      onClick={() => handleMenuClick(pageURL)}
+                      onClick={() => handleMenuClick(menuTitle, pageURL)}
                       className={classes.headerItemStyles}
                     >
                       {menuTitle}
@@ -145,7 +153,7 @@ const Header = () => {
                     <ListItem
                       key={index}
                       button
-                      onClick={() => handleButtonClick(pageURL)}
+                      onClick={() => handleButtonClick(menuTitle, pageURL)}
                       className={classes.headerItemStyles}
                     >
                       {menuTitle}
