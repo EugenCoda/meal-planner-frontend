@@ -1,5 +1,3 @@
-import React, { useContext } from "react";
-import { GlobalContext } from "../../context/GlobalState";
 import clsx from "clsx";
 import {
   FormGroup,
@@ -13,6 +11,16 @@ import { makeStyles } from "@material-ui/core/styles";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Tooltip, IconButton } from "@material-ui/core";
+import {
+  doc,
+  deleteDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
+import { db } from "../../firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,13 +83,23 @@ const ShoppingListItem = ({ shoppingItems, tag }) => {
   const classes = useStyles();
   // const theme = useTheme();
 
-  // Items from Global Context
-  const { markShoppingItemCompleted, removeCompletedShoppingItem } =
-    useContext(GlobalContext);
+  // Update Mark Completed
+  const handleMarkCompleted = async (id) => {
+    const q = query(collection(db, "shoppingList"), where("id", "==", id));
+    const querySnapshot = await getDocs(q);
+    const itemRef = doc(db, "shoppingList", querySnapshot.docs[0].id);
+
+    await updateDoc(itemRef, {
+      isCompleted: !querySnapshot.docs[0].data().isCompleted,
+    });
+  };
 
   // Remove Completed Shopping Item
-  const handleRemoveItem = (id) => {
-    removeCompletedShoppingItem(id);
+  const handleRemoveItem = async (id) => {
+    const q = query(collection(db, "shoppingList"), where("id", "==", id));
+    const querySnapshot = await getDocs(q);
+
+    await deleteDoc(doc(db, "shoppingList", querySnapshot.docs[0].id));
   };
 
   return (
@@ -105,7 +123,7 @@ const ShoppingListItem = ({ shoppingItems, tag }) => {
               control={
                 <Checkbox
                   checked={item.isCompleted}
-                  onChange={() => markShoppingItemCompleted(item.id)}
+                  onChange={() => handleMarkCompleted(item.id)}
                   name={item.name}
                   checkedIcon={
                     <span className={clsx(classes.icon, classes.checkedIcon)} />

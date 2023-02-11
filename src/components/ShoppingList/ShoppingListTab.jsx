@@ -1,8 +1,14 @@
-import React, { useContext } from "react";
 import ShoppingListItem from "./ShoppingListItem";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { GlobalContext } from "../../context/GlobalState";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  writeBatch,
+} from "firebase/firestore";
+import { db } from "../../firebase";
 
 const useStyles = makeStyles({
   btnStyle: {
@@ -18,12 +24,25 @@ const ShoppingListTab = ({
 }) => {
   const classes = useStyles();
 
-  // Items from Global Context
-  const { removeAllCompletedShoppingItems } = useContext(GlobalContext);
-
   // Remove All Completed Shopping Items
-  const handleRemoveAllCompletedItems = () => {
-    removeAllCompletedShoppingItems();
+  const handleRemoveAllCompletedItems = async () => {
+    const q = query(
+      collection(db, "shoppingList"),
+      where("isCompleted", "==", true)
+    );
+    const querySnapshot = await getDocs(q);
+
+    deleteItems(querySnapshot);
+  };
+
+  const deleteItems = async (items) => {
+    const batch = writeBatch(db);
+
+    items.forEach((item) => {
+      batch.delete(item.ref);
+    });
+
+    await batch.commit();
   };
 
   return (

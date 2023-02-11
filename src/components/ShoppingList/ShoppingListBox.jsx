@@ -1,9 +1,10 @@
-import React, { useContext, useState } from "react";
-import { GlobalContext } from "../../context/GlobalState";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Tabs, Tab, Box } from "@material-ui/core";
 import ShoppingListTab from "./ShoppingListTab";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,8 +54,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShoppingListBox = () => {
-  // Items from Global Context
-  const { shoppingList } = useContext(GlobalContext);
+  const [shoppingList, setShoppingList] = useState([]);
+
+  // Get items from Firestore
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(db, "shoppingList"),
+      (snapshot) => {
+        const docs = [];
+        snapshot.docs.forEach((doc) => {
+          docs.push(doc.data());
+        });
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === "added") {
+            console.log("New item: ", change.doc.data());
+          }
+          if (change.type === "modified") {
+            console.log("Modified item: ", change.doc.data());
+          }
+          if (change.type === "removed") {
+            console.log("Removed item: ", change.doc.data());
+          }
+          setShoppingList(docs);
+        });
+      }
+    );
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   // Select all uncompleted shopping items
   const shoppingItemsUncompleteFull = shoppingList.filter(

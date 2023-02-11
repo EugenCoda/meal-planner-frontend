@@ -86,34 +86,6 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
-  function addShoppingItem(shoppingItem) {
-    dispatch({
-      type: "ADD_SHOPPING_ITEM",
-      payload: shoppingItem,
-    });
-  }
-
-  function markShoppingItemCompleted(id) {
-    dispatch({
-      type: "MARK_SHOPPING_ITEM_COMPLETED",
-      payload: id,
-    });
-  }
-
-  function removeCompletedShoppingItem(id) {
-    dispatch({
-      type: "REMOVE_COMPLETED_SHOPPING_ITEM",
-      payload: id,
-    });
-  }
-
-  function removeAllCompletedShoppingItems() {
-    dispatch({
-      type: "REMOVE_ALL_COMPLETED_SHOPPING_ITEMS",
-      payload: "test",
-    });
-  }
-
   function setSearchFilter(text) {
     dispatch({
       type: "SET_SEARCH_FILTER",
@@ -138,10 +110,6 @@ export const GlobalProvider = ({ children }) => {
         selectDiet,
         selectIngredient,
         selectAllergy,
-        addShoppingItem,
-        markShoppingItemCompleted,
-        removeCompletedShoppingItem,
-        removeAllCompletedShoppingItems,
         setSearchFilter,
       }}
     >

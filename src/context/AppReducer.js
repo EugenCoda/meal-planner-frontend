@@ -132,46 +132,6 @@ export const AppReducer = (state, action) => {
         }),
       };
 
-    case "ADD_SHOPPING_ITEM":
-      return {
-        ...state,
-        loading: false,
-        shoppingList: [...state.shoppingList, action.payload],
-      };
-
-    case "MARK_SHOPPING_ITEM_COMPLETED":
-      return {
-        ...state,
-        loading: false,
-        shoppingList: state.shoppingList.map((item) => {
-          if (item.id === action.payload) {
-            return {
-              ...item,
-              isCompleted: !item.isCompleted,
-            };
-          }
-          return { ...item };
-        }),
-      };
-
-    case "REMOVE_COMPLETED_SHOPPING_ITEM":
-      return {
-        ...state,
-        loading: false,
-        shoppingList: state.shoppingList.filter((item) => {
-          return item.id !== action.payload;
-        }),
-      };
-
-    case "REMOVE_ALL_COMPLETED_SHOPPING_ITEMS":
-      return {
-        ...state,
-        loading: false,
-        shoppingList: state.shoppingList.filter((item) => {
-          return !item.isCompleted;
-        }),
-      };
-
     case "SET_SEARCH_FILTER":
       return {
         ...state,

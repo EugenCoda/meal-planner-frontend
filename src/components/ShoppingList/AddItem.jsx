@@ -1,22 +1,16 @@
-import React, { useContext } from "react";
-import { GlobalContext } from "../../context/GlobalState";
 import { Grid, Button, LinearProgress, MenuItem } from "@material-ui/core";
 import { Formik, Form, Field } from "formik";
 import { TextField } from "formik-material-ui";
 // Unique ID Generator
 import { v4 as uuidv4 } from "uuid";
 
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../../firebase";
+
 import units from "../../data/shoppingItemUnits";
 import categories from "../../data/shoppingItemCategories";
 
 const AddItem = () => {
-  // Items from Global Context
-  const { addShoppingItem } = useContext(GlobalContext);
-
-  const FocusTextField = ({ innerRef, ...props }) => (
-    <TextField ref={innerRef} {...props} />
-  );
-
   return (
     <>
       <Formik
@@ -41,16 +35,25 @@ const AddItem = () => {
           try {
             setSubmitting(false);
             // Adding item ID and date added
-            let idAndDate = { id: uuidv4(), dateAdded: new Date() };
+            let idAndDate = { id: uuidv4(), timeStamp: serverTimestamp() };
             const newValues = { ...values, ...idAndDate };
 
-            await addShoppingItem(newValues);
+            // Saving to Firestore
+            const docRef = await addDoc(
+              collection(db, "shoppingList"),
+              newValues
+            );
+            console.log("Document written with ID: ", docRef.id);
+
             resetForm();
             setStatus({ success: true });
           } catch (error) {
             setStatus({ success: false });
             setSubmitting(false);
             setErrors({ submit: error.message });
+
+            // Error saving to Firestore
+            console.error("Error adding document: ", error);
           }
         }}
       >
@@ -59,8 +62,7 @@ const AddItem = () => {
             <Grid container spacing={1}>
               <Grid item style={{ padding: "20px 5px" }}>
                 <Field
-                  autoFocus
-                  component={FocusTextField}
+                  component={TextField}
                   name="name"
                   type="text"
                   label="Add Item"
