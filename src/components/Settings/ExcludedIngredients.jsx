@@ -1,8 +1,18 @@
-import React, { useContext } from "react";
-import { GlobalContext } from "../../context/GlobalState";
+import React, { useState, useEffect } from "react";
 import { Paper, Typography, Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CheckIcon from "@material-ui/icons/Check";
+import AddItem from "./AddItem";
+import {
+  collection,
+  onSnapshot,
+  doc,
+  query,
+  where,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
+import { db } from "../../firebase";
 
 const useStyles = makeStyles({
   root: {
@@ -23,8 +33,47 @@ const useStyles = makeStyles({
 const ExcludedIngredients = () => {
   const classes = useStyles();
 
-  // Items from Global Context
-  const { ingredients, selectIngredient } = useContext(GlobalContext);
+  const [ingredients, setIngredients] = useState([]);
+
+  // Get items from Firestore
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(db, "ingredients"),
+      (snapshot) => {
+        const docs = [];
+        snapshot.docs.forEach((doc) => {
+          docs.push(doc.data());
+        });
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === "added") {
+            console.log("New item: ", change.doc.data());
+          }
+          if (change.type === "modified") {
+            console.log("Modified item: ", change.doc.data());
+          }
+          if (change.type === "removed") {
+            console.log("Removed item: ", change.doc.data());
+          }
+          setIngredients(docs);
+        });
+      }
+    );
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  // Handle Select Ingredient
+  const handleSelectIngredient = async (id) => {
+    const q = query(collection(db, "ingredients"), where("id", "==", id));
+    const querySnapshot = await getDocs(q);
+    const itemRef = doc(db, "ingredients", querySnapshot.docs[0].id);
+
+    await updateDoc(itemRef, {
+      isSelected: !querySnapshot.docs[0].data().isSelected,
+    });
+  };
 
   return (
     <Paper className={classes.mainContainer}>
@@ -40,7 +89,7 @@ const ExcludedIngredients = () => {
                 color="primary"
                 startIcon={<CheckIcon />}
                 onClick={() => {
-                  selectIngredient(ingredient.id);
+                  handleSelectIngredient(ingredient.id);
                 }}
               >
                 {ingredient.name}
@@ -49,7 +98,7 @@ const ExcludedIngredients = () => {
               <Button
                 variant="contained"
                 onClick={() => {
-                  selectIngredient(ingredient.id);
+                  handleSelectIngredient(ingredient.id);
                 }}
               >
                 {ingredient.name}
@@ -57,6 +106,11 @@ const ExcludedIngredients = () => {
             )}
           </Grid>
         ))}
+        <Grid item>
+          <Grid item>
+            <AddItem category="ingredient" />
+          </Grid>
+        </Grid>
       </Grid>
     </Paper>
   );

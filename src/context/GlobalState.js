@@ -1,18 +1,13 @@
 import React, { createContext, useReducer, useEffect } from "react";
 import { AppReducer } from "./AppReducer";
-import allergies from "../data/allergies";
-import diets from "../data/diets";
 import ingredients from "../data/ingredients";
 import recipeList from "../data/recipes";
 
 // Initial state
 const initialState = {
-  allergies: allergies,
-  diets: diets,
   ingredients: ingredients,
   recipes: recipeList,
   weeklyPlan: [],
-  shoppingList: [],
   searchFilter: "",
   error: null,
   loading: true,
@@ -66,26 +61,6 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
-  function selectDiet(id) {
-    dispatch({
-      type: "SELECT_DIET",
-      payload: id,
-    });
-  }
-
-  function selectIngredient(id) {
-    dispatch({
-      type: "SELECT_INGREDIENT",
-      payload: id,
-    });
-  }
-  function selectAllergy(id) {
-    dispatch({
-      type: "SELECT_ALLERGY",
-      payload: id,
-    });
-  }
-
   function setSearchFilter(text) {
     dispatch({
       type: "SET_SEARCH_FILTER",
@@ -97,19 +72,13 @@ export const GlobalProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         recipes: state.recipes,
-        diets: state.diets,
         ingredients: state.ingredients,
-        allergies: state.allergies,
-        shoppingList: state.shoppingList,
         weeklyPlan: state.weeklyPlan,
         searchFilter: state.searchFilter,
         createDailyPlan,
         addToDailyPlan,
         removeFromDailyPlan,
         addToFavorites,
-        selectDiet,
-        selectIngredient,
-        selectAllergy,
         setSearchFilter,
       }}
     >
