@@ -159,8 +159,11 @@ const Recipe = (props) => {
           style={{ padding: "20px 0" }}
         >
           <Grid item>
-            <Button variant="contained" onClick={() => navigate("/")}>
-              Home
+            <Button
+              variant="contained"
+              onClick={() => navigate("/meal-planner")}
+            >
+              Back to meal planner
             </Button>
           </Grid>
           <Grid item>

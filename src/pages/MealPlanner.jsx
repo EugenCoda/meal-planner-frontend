@@ -1,10 +1,10 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-// import CurrentWeek from "../components/Home/CurrentWeek";
-import DailyPlan from "../components/Home/DailyPlan";
+// import CurrentWeek from "../components/MealPlanner/CurrentWeek";
+import DailyPlan from "../components/MealPlanner/DailyPlan";
 import moment from "moment";
 
-const Home = () => {
+const MealPlanner = () => {
   let dates = {
     today: moment().format("ddd DD").toString(),
     currentWeek: moment().isoWeek().toString(),
@@ -105,4 +105,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default MealPlanner;

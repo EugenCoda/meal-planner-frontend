@@ -83,6 +83,13 @@ const ShoppingListItem = ({ shoppingItems, tag }) => {
   const classes = useStyles();
   // const theme = useTheme();
 
+  const shoppingItemsLowerCase = shoppingItems.map((item) => {
+    return { ...item, name: item.name.toLowerCase() };
+  });
+  const shoppingItemsSortedAlphabetically = shoppingItemsLowerCase.sort(
+    (a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0)
+  );
+
   // Update Mark Completed
   const handleMarkCompleted = async (id) => {
     const q = query(collection(db, "shoppingList"), where("id", "==", id));
@@ -105,7 +112,7 @@ const ShoppingListItem = ({ shoppingItems, tag }) => {
   return (
     <>
       <FormGroup>
-        {shoppingItems.map((item) => (
+        {shoppingItemsSortedAlphabetically.map((item) => (
           <Paper
             elevation={0}
             key={item.id}

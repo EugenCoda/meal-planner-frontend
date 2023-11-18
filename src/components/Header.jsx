@@ -64,7 +64,7 @@ const Header = () => {
 
   const menuItems = [
     {
-      menuTitle: "Home",
+      menuTitle: "Shopping List",
       pageURL: "/",
     },
     {
@@ -76,8 +76,8 @@ const Header = () => {
       pageURL: "/favorites",
     },
     {
-      menuTitle: "Shopping List",
-      pageURL: "/shopping-list",
+      menuTitle: "Meal Planner",
+      pageURL: "/meal-planner",
     },
     {
       menuTitle: "Settings",

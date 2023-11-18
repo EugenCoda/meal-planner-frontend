@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Grid from "@material-ui/core/Grid";
 import Header from "./components/Header";
 import Login from "./pages/Login";
-import Home from "./pages/Home";
+import MealPlanner from "./pages/MealPlanner";
 import Search from "./pages/Search";
 import Favorites from "./pages/Favorites";
 import ShoppingList from "./pages/ShoppingList";
@@ -34,7 +34,7 @@ function App() {
                   index
                   element={
                     <RequireAuth>
-                      <Home />
+                      <ShoppingList />
                     </RequireAuth>
                   }
                 />
@@ -55,10 +55,10 @@ function App() {
                   }
                 />
                 <Route
-                  path="shopping-list"
+                  path="meal-planner"
                   element={
                     <RequireAuth>
-                      <ShoppingList />
+                      <MealPlanner />
                     </RequireAuth>
                   }
                 />
